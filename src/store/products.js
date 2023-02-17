@@ -9,13 +9,19 @@ export default new Vuex.Store({
     state:{
       service: new service(),
       allProducts:[],
-    },
-    getters:{   
-
+      favorites:[],
+      cart:[],
     },
     mutations:{
         setAllProducts(state, data){
             state.allProducts = data
+        },
+        //add product to list favs
+        setAddFavorites(state,payload){
+          state.favorites= payload
+        },
+        setAddCart(state,payload){
+          state.cart= payload
         }
 
     },
@@ -31,7 +37,9 @@ export default new Vuex.Store({
                 reject(error);
               }
             });
-          }
+          },
+
+        
 
     }
 })

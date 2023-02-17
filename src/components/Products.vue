@@ -1,6 +1,6 @@
 <template>
          <div class="card__container">
-            <v-simple-table  class="mr-5 ml-5">
+  <v-simple-table  class="mr-5 ml-5">
     <template v-slot:default>
       <thead>
         <tr>
@@ -22,8 +22,15 @@
         >
           <td><img :src="item.imagen"  width="100px" height="100px"></td>
           <td>{{item.title}}</td>
-          <td>{{item.precio}}</td>
-          <td><v-btn class="red" dark @click="addFav(product)"><v-icon class="mdi-heart" >mdi-heart</v-icon></v-btn></td>
+          <td>${{item.precio}}</td>
+          <td>
+            <v-btn icon color="pink"  @click="addToFavorites(item)">
+              <v-icon class="mdi-heart" >mdi-heart</v-icon>
+            </v-btn>
+            <v-btn color="yellow"  @click="addToCart(item)">
+              comprar
+            </v-btn>
+          </td>
         </tr>
       </tbody>
     </template>
@@ -33,21 +40,45 @@
 </template>
 <script>
 import products from '../store/products';
+
 export default {
-     created() {
-            //hace un pedido de los productos
-            products.dispatch('getProducts').then(() => {
-                  console.log('productos cargados')
-            })
+    data(){
+      return{
+        favs :[],
+        cart:[]
+      }
+    },
+     mounted() {
+      //hace un pedido de los productos
+      products.dispatch('getProducts').then(() => {
+        console.log('productos cargados')
+      })
       },
       computed: {
-            allProducts() {
+            allProducts(){
                   return products.state.allProducts
             },
+            
+            allFavs(){
+              console.log(products.state.favorites)
+              return products.state.favorites
+            },
+
+            allCart(){
+              return products.state.cart
+            }
+      },
+      methods:{
+       addToFavorites(product) {
+          this.favs.push(product)
+          products.commit('setAddFavorites', this.favs)
+      },
+      addToCart(product){
+        this.cart.push(product)
+        products.commit('setAddCart', this.cart)
       }
+      }
+      
     
 }
 </script>
-<style scoped>
-
-</style>
