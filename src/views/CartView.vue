@@ -1,6 +1,6 @@
 <template>
   <div class="mt-2">
-    <h2>Cart</h2>
+    <h1 class="mt-5 text-center">Cart</h1>
       <Cart></Cart>
   </div>
 </template>

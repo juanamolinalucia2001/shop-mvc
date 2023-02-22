@@ -36,9 +36,9 @@
       <v-btn icon>
          <v-badge
           color="red"
-          :content="cantProducts"
+          :content="cantProducts" 
         >
-           <v-icon>mdi-cart</v-icon>
+           <v-icon v-if="cantProducts>=0">mdi-cart</v-icon>
         </v-badge>
         
       </v-btn>

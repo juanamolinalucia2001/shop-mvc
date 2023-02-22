@@ -1,6 +1,6 @@
 <template>
-         <div class="card__container">
-  <v-simple-table  class="mr-5 ml-5">
+  <div class="card__container">
+  <v-simple-table  class="mr-5 ml-5 ">
     <template v-slot:default>
       <thead>
         <tr>
@@ -18,13 +18,13 @@
       </thead>
       <tbody>
         <tr
-          v-for="item in allProducts" :key="item.id" 
+          v-for="item in allProducts" :key="item.id"
         >
           <td><img :src="item.imagen"  width="100px" height="100px"></td>
           <td>{{item.title}}</td>
           <td>${{item.precio}}</td>
           <td>
-            <v-btn icon color="pink"  @click="addToFavorites(item)">
+            <v-btn icon color="pink" @click="addToFavorites(item)">
               <v-icon class="mdi-heart" >mdi-heart</v-icon>
             </v-btn>
             <v-btn color="yellow"  @click="addToCart(item)">
@@ -82,3 +82,10 @@ export default {
     
 }
 </script>
+<style>
+.card__container{
+  display:flex;
+  justify-content: center;
+    align-items: center;
+}
+</style>

@@ -29,8 +29,7 @@
       </tbody>
     </template>
   </v-simple-table>
-   <h3>Cantidad de productos :{{ cantidadProducts }}</h3>
-  <h3>Total a pagar US${{totalPriceCart}}</h3>
+  <h3 class="text-center">Total a pagar US${{totalPriceCart}}</h3>
 </div>
   
 </template>

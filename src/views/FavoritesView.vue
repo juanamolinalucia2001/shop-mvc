@@ -1,8 +1,10 @@
 <template>
-  <div class="mt-2">
-    <h2>Favoritos</h2>
+<div>
+  <h1 class="mt-5 text-center">Favoritos</h1>
+  <v-layout class="mt-5 align-center">
       <Favorites></Favorites>
-  </div>
+  </v-layout>
+</div>
 </template>
 <script>
 import Favorites from '@/components/Favorites.vue'
