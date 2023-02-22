@@ -25,11 +25,27 @@ export default new Vuex.Store({
         }
 
     },
+    getters:{
+      cartTotal(state){
+        let total = 0;
+        state.cart.forEach(item => {
+            total += item.precio;
+        });
+        return Number(total.toFixed(2));
+    },
+    cartLength(state){
+      return state.cart.length
+    },
+    favoritesLength(state){
+      return state.favorites.length
+    }
+    },
     actions:{
         async getProducts(state) {
             return new Promise(async (resolve, reject) => {
               try {
                 let item = await state.state.service.getAllProducts();
+                console.log(item)
       
                 state.commit("setAllProducts",  item );
                 resolve(true);
@@ -38,8 +54,11 @@ export default new Vuex.Store({
               }
             });
           },
-
-        
+        xremoveFromFavorites({ commit, state }, productId) {
+            const favorites = state.favorites.filter((product) => product.id !== productId)
+            commit('setFavorites', favorites)
+          }
 
     }
+  
 })

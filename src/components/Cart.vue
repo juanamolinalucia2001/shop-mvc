@@ -13,9 +13,10 @@
           <th>
             Price
           </th>
-          <th></th>
+         
         </tr>
       </thead>
+      
       <tbody>
         <tr
           v-for="item in cart" :key="item.id" 
@@ -23,10 +24,13 @@
           <td>{{item.id}}</td>
           <td>{{item.title}}</td>
           <td>${{item.precio}}</td>
-        </tr>
+          </tr>
+      
       </tbody>
     </template>
   </v-simple-table>
+   <h3>Cantidad de productos :{{ cantidadProducts }}</h3>
+  <h3>Total a pagar US${{totalPriceCart}}</h3>
 </div>
   
 </template>
@@ -37,16 +41,23 @@ import products from '../store/products';
 export default {
     data(){
       return{
-        carrito:[]
+
       }
     },
     computed: {  
             cart(){
               return products.state.cart
+            },
+            totalPriceCart(){
+                return products.getters.cartTotal
+            },
+            cantidadProducts(){
+                return products.getters.cartLength
             }
+
       },
     methods:{
-        
+      
     }
      
 }
