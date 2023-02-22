@@ -1,5 +1,5 @@
 # tienda-mvc
-
+https://shop-vuex-mvc.netlify.app/
 ## Project setup
 ```
 npm install
