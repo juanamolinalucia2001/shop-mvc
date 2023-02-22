@@ -7,11 +7,6 @@
 
       <v-toolbar-title>Ecommerce</v-toolbar-title>
 
-      <v-spacer></v-spacer>
-
-      <v-btn icon class="mt-3">
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn>
     <v-spacer></v-spacer>
      <router-link to="/" class="none">
       <v-btn icon class="mt-3">
@@ -43,6 +38,7 @@
         
       </v-btn>
     </router-link>
+    <router-view>
     </v-toolbar>
   </v-card>
 </template>

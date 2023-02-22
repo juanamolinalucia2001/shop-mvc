@@ -1,6 +1,6 @@
 <template>
 <div>
-  <h1 class="mt-5 text-center">Favoritos</h1>
+  <h1 class="mt-5 text-center">Favorites</h1>
   <v-layout class="mt-5 align-center">
       <Favorites></Favorites>
   </v-layout>
