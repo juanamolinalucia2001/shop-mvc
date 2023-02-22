@@ -3,7 +3,7 @@
     tile
   >
     <v-toolbar dense class="yellow" >
-      <v-app-bar-nav-icon></v-app-bar-nav-icon>
+      <!-- <v-app-bar-nav-icon></v-app-bar-nav-icon> -->
 
       <v-toolbar-title>Ecommerce</v-toolbar-title>
 
