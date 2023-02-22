@@ -38,7 +38,6 @@
         
       </v-btn>
     </router-link>
-    <router-view>
     </v-toolbar>
   </v-card>
 </template>

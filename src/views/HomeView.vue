@@ -1,7 +1,7 @@
 <template>
   <v-container>
-    <Carrusel></Carrusel>
-    <h1 class="mt-5 mb-5 text-center">Products</h1>
+    <Carrusel/>
+    <h1 class="mt-5  text-center">Products</h1>
     <Products></Products>
 
 
