@@ -1,23 +1,24 @@
 <template>
   <v-card
     tile
+    class="yellow"
   >
     <v-toolbar dense class="yellow" >
-      <!-- <v-app-bar-nav-icon></v-app-bar-nav-icon> -->
+      <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
       <v-toolbar-title>Ecommerce</v-toolbar-title>
 
     <v-spacer></v-spacer>
-     <router-link to="/" class="none">
-      <v-btn icon class="mt-3">
+     
+      <v-btn icon class="mt-3 ml-3" to="/">
       
            <v-icon>mdi-home</v-icon>
        
       </v-btn>
-     </router-link>
+    
 
-     <router-link to="/favorites">
-      <v-btn icon class="mt-3">
+    
+      <v-btn icon class="mt-3 ml-3"  to="/favorites">
          <v-badge
           color="red"
           :content="cantFavorites"
@@ -25,10 +26,10 @@
            <v-icon>mdi-heart</v-icon>
         </v-badge>
       </v-btn>
-     </router-link>
+    
 
-    <router-link to="/cart" class="mt-3">
-      <v-btn icon>
+ 
+      <v-btn icon to="/cart" class="mt-3 ml-3 mr-3">
          <v-badge
           color="red"
           :content="cantProducts" 
@@ -37,7 +38,7 @@
         </v-badge>
         
       </v-btn>
-    </router-link>
+  
     </v-toolbar>
   </v-card>
 </template>

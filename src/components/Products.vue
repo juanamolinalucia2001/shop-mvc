@@ -40,6 +40,7 @@
 </template>
 <script>
 import products from '../store/products';
+import Snackbar from '../components/commons/Alert.vue'
 
 export default {
     data(){
@@ -47,6 +48,9 @@ export default {
         favs :[],
         cart:[]
       }
+    },
+    components:{
+      
     },
      mounted() {
       //hace un pedido de los productos

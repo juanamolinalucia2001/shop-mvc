@@ -13,8 +13,9 @@
         text
         rounded
         class="my-2"
+        :to="link.link"
       >
-        {{ link }}
+        {{ link.view }}
       </v-btn>
       <v-col
         class="yellow py-4 text-center"
@@ -29,12 +30,10 @@
   export default {
     data: () => ({
       links: [
-        'Home',
-        'About Us',
-        'Team',
-        'Services',
-        'Blog',
-        'Contact Us',
+        {view:'Home',link:'/'},
+        {view:'Cart', link:'/cart'},
+        {view:'Favorites', link:'/favorites'},
+        {view:'Products', link:'/'}
       ],
     }),
   }
