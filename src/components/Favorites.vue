@@ -1,6 +1,6 @@
 <template>
  <div class="container mx-auto">
-    <v-card class="mr-5 ml-5" max-width="200" v-for="product in favorites"
+    <v-card class="mr-5 ml-5" max-width="250" v-for="product in favorites"
              :key="product.id">
             <div class="card">
                     <div>
@@ -37,7 +37,7 @@ export default {
     grid-template-columns: auto auto auto auto;
 }
 .card{
-      max-width: 300px;
+      max-width: 250px;
       height: 400px;
       overflow: hidden;
       display: flex;
