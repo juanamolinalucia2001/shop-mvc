@@ -9,7 +9,7 @@
     >
       <v-btn
         v-for="link in links"
-        :key="link"
+        :key="link  .id"
         text
         rounded
         class="my-2"
@@ -30,10 +30,10 @@
   export default {
     data: () => ({
       links: [
-        {view:'Home',link:'/'},
-        {view:'Cart', link:'/cart'},
-        {view:'Favorites', link:'/favorites'},
-        {view:'Products', link:'/'}
+        {id:1,view:'Home',link:'/'},
+        {id:2,view:'Cart', link:'/cart'},
+        {id:3,view:'Favorites', link:'/favorites'},
+        {id:4,view:'Products', link:'/products'}
       ],
     }),
   }

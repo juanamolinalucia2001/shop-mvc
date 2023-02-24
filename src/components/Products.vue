@@ -1,40 +1,22 @@
 <template>
-  <div class="card__container">
-  <v-simple-table  class="mr-5 ml-5 ">
-    <template v-slot:default>
-      <thead>
-        <tr>
-          <th class="text-left">
-            Product
-          </th>
-          <th class="text-left">
-            Title
-          </th>
-          <th>
-            Price
-          </th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr
-          v-for="item in allProducts" :key="item.id"
-        >
-          <td><img :src="item.imagen"  width="100px" height="100px"></td>
-          <td>{{item.title}}</td>
-          <td>${{item.precio}}</td>
-          <td>
-            <v-btn icon color="pink" @click="addToFavorites(item)">
+  <div class=".card__container">
+    <v-select v-model="selectedCategory" :items="categories" label="Category"></v-select>
+      <v-data-table :headers="headers" :items="filteredProducts" hide-default-footer >
+         <template v-slot:item.imagen="{ item }">
+          <v-img :src="item.imagen" max-width="100"></v-img>
+        </template>
+        <template v-slot:item.actions="{ item }">
+          <v-btn icon color="pink" @click="addToFavorites(item)">
               <v-icon class="mdi-heart" >mdi-heart</v-icon>
             </v-btn>
-            <v-btn color="yellow"  @click="addToCart(item)">
-              comprar
+            <v-btn icon color="orange"  @click="addToCart(item)">
+             + <v-icon class="mdi-cart" >mdi-cart</v-icon>
             </v-btn>
-          </td>
-        </tr>
-      </tbody>
-    </template>
-  </v-simple-table>
+        </template>
+      </v-data-table>
+        
+
+  
       <Snackbar
       :show="showSnackbar"
       :text="snackbarText"
@@ -52,9 +34,25 @@ export default {
       return{
         favs :[],
         cart:[],
+
+        selectedCategory: null,
         showSnackbar: false,
         snackbarText: "",
         snackbarColor: "",
+        headers: [
+        { text: 'Product', value: 'title' },
+        {text:'Imagen', value:'imagen'}, 
+        { text: 'Descripción', value: 'descripcion' },
+        { text: 'Price', value: 'precio' },
+        { text: 'Category', value: 'categoria' },
+        { text: 'Actions', value: 'actions', sortable: false },
+      ],
+      pagination: {
+        sortBy: 'title',
+        descending: false,
+        rowsPerPage: 10,
+      },
+      search: '',
       }
     },
      components: {
@@ -65,10 +63,23 @@ export default {
       products.dispatch('getProducts').then(() => {
         console.log('productos cargados')
       })
+
+       products.dispatch('getCategories').then(() => {
+        console.log('categorias')
+      })
+
+     
+
+
+      
       },
+      
       computed: {
             allProducts(){
                   return products.state.allProducts
+            },
+            categories(){
+                return products.state.allCategories
             },
             
             allFavs(){
@@ -78,7 +89,16 @@ export default {
 
             allCart(){
               return products.state.cart
+            },
+
+           filteredProducts() {
+            if (this.selectedCategory) {
+              return this.allProducts.filter(p => p.categoria === this.selectedCategory);
             }
+            return this.allProducts;
+    },
+
+
       },
       methods:{
        addToFavorites(product) {

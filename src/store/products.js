@@ -9,12 +9,16 @@ export default new Vuex.Store({
     state:{
       service: new service(),
       allProducts:[],
+      allCategories:[],
       favorites:[],
       cart:[],
     },
     mutations:{
         setAllProducts(state, data){
             state.allProducts = data
+        },
+        setAllCategories(state,data){
+          state.allCategories = data
         },
         //add product to list favs
         setAddFavorites(state,payload){
@@ -54,11 +58,20 @@ export default new Vuex.Store({
               }
             });
           },
-        xremoveFromFavorites({ commit, state }, productId) {
-            const favorites = state.favorites.filter((product) => product.id !== productId)
-            commit('setFavorites', favorites)
+      async getCategories(state) {
+        return new Promise(async (resolve, reject) => {
+          try{
+            let item = await state.state.service.getAllCategories();
+            console.log(item)
+      
+            state.commit("setAllCategories",  item );
+            resolve(true);
           }
-
+          catch (error) {
+                reject(error);
+              }
+            });
+          },
     }
   
 })

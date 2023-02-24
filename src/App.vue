@@ -14,13 +14,17 @@ import Footer from '@/components/commons/Footer.vue'
 
 export default {
   name: 'App',
-
-  data: () => ({
-    //
-  }),
+  data(){
+    return{
+      mensaje:'hola'
+    }
+  },
   components:{
     Nav,
     Footer
+  },
+  methods:{
+
   }
 };
 </script>

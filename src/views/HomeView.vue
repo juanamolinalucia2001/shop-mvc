@@ -1,8 +1,7 @@
 <template>
-  <v-container>
+  <v-container class="mt-3 text-center">
     <Carrusel/>
-    <h1 class="mt-5  text-center">Products</h1>
-    <Products></Products>
+    <v-btn to="/products" class="yellow" >Buy Products <v-icon>mdi-cart</v-icon></v-btn>
 
 
   </v-container>
