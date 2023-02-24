@@ -35,6 +35,11 @@
       </tbody>
     </template>
   </v-simple-table>
+      <Snackbar
+      :show="showSnackbar"
+      :text="snackbarText"
+      :color="snackbarColor"
+    />
          </div>
 
 </template>
@@ -46,11 +51,14 @@ export default {
     data(){
       return{
         favs :[],
-        cart:[]
+        cart:[],
+        showSnackbar: false,
+        snackbarText: "",
+        snackbarColor: "",
       }
     },
-    components:{
-      
+     components: {
+    Snackbar,
     },
      mounted() {
       //hace un pedido de los productos
@@ -76,10 +84,18 @@ export default {
        addToFavorites(product) {
           this.favs.push(product)
           products.commit('setAddFavorites', this.favs)
+
+          this.showSnackbar = true;
+          this.snackbarText = "Product add to favorites";
+          this.snackbarColor = "red";
       },
       addToCart(product){
         this.cart.push(product)
         products.commit('setAddCart', this.cart)
+
+        this.showSnackbar = true;
+        this.snackbarText = "Product add to cart";
+        this.snackbarColor = "green";
       }
       }
       
