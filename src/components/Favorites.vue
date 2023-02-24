@@ -1,6 +1,6 @@
 <template>
  <div class="container mx-auto">
-    <v-card class="mr-5 ml-5" max-width="250" v-for="product in favorites"
+    <v-card class="mr-5 ml-5 mt-5 mb-5" max-width="250" v-for="product in favorites"
              :key="product.id">
             <div class="card">
                     <div>
