@@ -1,9 +1,15 @@
 <template>
   <div class=".card__container">
     <v-select v-model="selectedCategory" :items="categories" label="Category"></v-select>
-      <v-data-table :headers="headers" :items="filteredProducts" hide-default-footer >
+      <v-data-table :headers="headers" :items="filteredProducts" hide-default-footer style="font-family:Helvetica;">
+         <template v-slot:item.title="{ item }">
+          <b>{{item.title}}</b>
+        </template>
          <template v-slot:item.imagen="{ item }">
           <v-img :src="item.imagen" max-width="100"></v-img>
+        </template>
+         <template v-slot:item.precio="{ item }">
+          <p>${{item.precio}}</p>
         </template>
         <template v-slot:item.actions="{ item }">
           <v-btn icon color="pink" @click="addToFavorites(item)">

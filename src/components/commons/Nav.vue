@@ -21,6 +21,8 @@
          <v-badge
           color="red"
           :content="cantFavorites"
+          :value="cantFavorites"
+        
         >
            <v-icon>mdi-heart</v-icon>
         </v-badge>
@@ -32,6 +34,7 @@
          <v-badge
           color="red"
           :content="cantProducts" 
+          :value="cantProducts"
         >
            <v-icon v-if="cantProducts>=0">mdi-cart</v-icon>
         </v-badge>
