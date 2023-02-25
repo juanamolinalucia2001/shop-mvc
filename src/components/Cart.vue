@@ -24,24 +24,37 @@
           <td>{{item.id}}</td>
           <td>{{item.title}}</td>
           <td>${{item.precio}}</td>
+          <td><v-btn><v-icon>mdi-delete</v-icon></v-btn></td>
           </tr>
       
       </tbody>
     </template>
   </v-simple-table>
-  <h3 class="text-center">Total a pagar US${{totalPriceCart}}</h3>
+  
+  <h3 class="text-center" v-if="totalPriceCart>0">Total a pagar US${{totalPriceCart}}</h3>
+
+    
+     
+    <MultiStepForm />
+ 
+  
 </div>
   
 </template>
 <script>
 import products from '../store/products';
+import  MultiStepForm from '@/components/commons/ModalForm.vue'
 
 
 export default {
     data(){
       return{
+       
 
       }
+    },
+    components:{
+       MultiStepForm,
     },
     computed: {  
             cart(){
