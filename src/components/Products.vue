@@ -1,7 +1,9 @@
 <template>
   <div class=".card__container">
     <v-select v-model="selectedCategory" :items="categories" label="Category"></v-select>
-      <v-data-table :headers="headers" :items="filteredProducts" hide-default-footer style="font-family:Helvetica;">
+      <v-data-table :headers="headers" :items="filteredProducts" hide-default-footer style="font-family:Helvetica;"
+       loading
+    loading-text="Loading... Please wait">
          <template v-slot:item.title="{ item }">
           <b>{{item.title}}</b>
         </template>
@@ -40,9 +42,7 @@ export default {
       return{
         favs :[],
         cart:[],
-
         selectedCategory: null,
-        showSnackbar: false,
         snackbarText: "",
         snackbarColor: "",
         headers: [
@@ -108,20 +108,24 @@ export default {
       },
       methods:{
        addToFavorites(product) {
+          this.showSnackbar = null;
           this.favs.push(product)
           products.commit('setAddFavorites', this.favs)
 
           this.showSnackbar = true;
-          this.snackbarText = "Product add to favorites";
+          this.snackbarText = "Product add to favorites"+product.title;
           this.snackbarColor = "red";
+          
       },
       addToCart(product){
+        this.showSnackbar = null;
         this.cart.push(product)
         products.commit('setAddCart', this.cart)
 
         this.showSnackbar = true;
-        this.snackbarText = "Product add to cart";
+        this.snackbarText = "Product add to cart"+product.title;
         this.snackbarColor = "green";
+      
       }
       }
       

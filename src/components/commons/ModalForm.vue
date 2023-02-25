@@ -1,5 +1,6 @@
 <template>
-  <v-dialog v-model="showModal" max-width="800px" heigth="800" class="mt-5">
+ <v-row class="text-rigth"  >
+  <v-dialog v-model="showModal" max-width="800">
      <template v-slot:activator="{ on, attrs }">
         <v-btn
           color="red lighten-2"
@@ -10,11 +11,10 @@
           Click Me
         </v-btn>
       </template>
-    <v-card>
-      <v-card-text>
-        <v-stepper v-model="step">
+        <div>
+        <v-stepper v-model="step"  height="500">
             <!-- Header form multi-step  -->
-          <v-stepper-header class="mt-5">
+          <v-stepper-header >
             <v-stepper-step :complete="step > 1" step="1"></v-stepper-step>
             <v-divider></v-divider>
             <v-stepper-step :complete="step > 2" step="2"></v-stepper-step>
@@ -106,9 +106,9 @@
             </v-stepper-content>
           </v-stepper-items>
         </v-stepper>
-      </v-card-text>
-    </v-card>
+        </div>
   </v-dialog>
+   </v-row>
 </template>
 
 <script>

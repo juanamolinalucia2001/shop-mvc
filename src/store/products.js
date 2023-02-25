@@ -26,6 +26,12 @@ export default new Vuex.Store({
         },
         setAddCart(state,payload){
           state.cart= payload
+        },
+        deleteProduct(state, id) {
+          state.cart = state.cart.filter(product => product.id !== id);
+        },
+        deleteAll(state) {
+          state.cart = [];
         }
 
     },
@@ -72,6 +78,9 @@ export default new Vuex.Store({
               }
             });
           },
+        deleteProduct({ commit }, id) {
+            commit('deleteProduct', id);
+        }
     }
   
 })

@@ -13,6 +13,7 @@
           <th>
             Price
           </th>
+          <th>Actions</th>
          
         </tr>
       </thead>
@@ -24,16 +25,16 @@
           <td>{{item.id}}</td>
           <td>{{item.title}}</td>
           <td>${{item.precio}}</td>
-          <td><v-btn><v-icon>mdi-delete</v-icon></v-btn></td>
+          <td><v-btn @click="deleteCart(item.id)"><v-icon>mdi-delete</v-icon></v-btn></td>
           </tr>
       
       </tbody>
     </template>
-  </v-simple-table>
-  
+  </v-simple-table><br>
+  <button @click="deleteAll">Delete Cart</button>
+  <br>
   <h3 class="text-center" v-if="totalPriceCart>0">Total a pagar US${{totalPriceCart}}</h3>
-
-    
+    <br>
      
     <MultiStepForm />
  
@@ -69,7 +70,12 @@ export default {
 
       },
     methods:{
-      
+      deleteCart(index){
+        products.commit('deleteProduct', index)
+      },
+      deleteAll(){
+        products.commit('deleteAll')
+      }
     }
      
 }

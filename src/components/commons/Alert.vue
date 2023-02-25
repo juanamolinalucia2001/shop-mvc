@@ -1,5 +1,5 @@
 <template>
-  <v-snackbar :color="color" v-model="show" >
+  <v-snackbar :color="color" v-model="show"  >
     {{ text }}
     <template v-slot:action="{ attrs }">
       <v-btn text v-bind="attrs" @click="show = false">
@@ -17,7 +17,7 @@ export default {
   },
   data() {
     return {
-      //
+
     };
   },
 };
