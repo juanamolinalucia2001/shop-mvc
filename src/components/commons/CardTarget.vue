@@ -59,7 +59,7 @@ export default {
 
        rules: {
         required: (value) => !!value || 'Este campo es requerido',
-        cardNumber: (value) => /^([0-9]{4}-){3}[0-9]{4}$/.test(value) || 'Ingrese un número de tarjeta de crédito válido',
+        cardNumber: (value) => /^([0-9]{4}){3}[0-9]{4}$/.test(value) || 'Ingrese un número de tarjeta de crédito válido',
         expirationMonth: (value) => /^(0?[1-9]|1[0-2])$/.test(value) || 'Ingrese un mes de vencimiento válido (MM)',
         expirationYear: (value) => /^20\d{2}$/.test(value) || 'Ingrese un año de vencimiento válido (YYYY)',
         cvv: (value) => /^[0-9]{3,4}$/.test(value) || 'Ingrese un CVV válido',
