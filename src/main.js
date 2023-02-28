@@ -4,8 +4,14 @@ import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify'
 import '@babel/polyfill'
+import Vuelidate from 'vuelidate'
+Vue.use(Vuelidate)
 
 Vue.config.productionTip = false
+
+import VuePaycard from "vue-paycard";
+
+Vue.use(VuePaycard);
 
 new Vue({
   router,

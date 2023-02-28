@@ -1,9 +1,9 @@
 <template>
-  <v-snackbar :color="color" v-model="show"  >
+  <v-snackbar :color="color" v-model="show" :timeout="1000" >
     {{ text }}
     <template v-slot:action="{ attrs }">
       <v-btn text v-bind="attrs" @click="show = false">
-        Cerrar
+        Close
       </v-btn>
     </template>
   </v-snackbar>

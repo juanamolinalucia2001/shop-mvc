@@ -2,8 +2,8 @@
   <div class=".card__container">
     <v-select v-model="selectedCategory" :items="categories" label="Category"></v-select>
       <v-data-table :headers="headers" :items="filteredProducts" hide-default-footer style="font-family:Helvetica;"
-       loading
-    loading-text="Loading... Please wait">
+       :loading="loadTable"
+       loading-text="Loading... Please wait">
          <template v-slot:item.title="{ item }">
           <b>{{item.title}}</b>
         </template>
@@ -45,6 +45,7 @@ export default {
         selectedCategory: null,
         snackbarText: "",
         snackbarColor: "",
+        showSnackbar:false,
         headers: [
         { text: 'Product', value: 'title' },
         {text:'Imagen', value:'imagen'}, 
@@ -53,12 +54,8 @@ export default {
         { text: 'Category', value: 'categoria' },
         { text: 'Actions', value: 'actions', sortable: false },
       ],
-      pagination: {
-        sortBy: 'title',
-        descending: false,
-        rowsPerPage: 10,
-      },
-      search: '',
+      loadTable:true
+      
       }
     },
      components: {
@@ -67,7 +64,10 @@ export default {
      mounted() {
       //hace un pedido de los productos
       products.dispatch('getProducts').then(() => {
+       
         console.log('productos cargados')
+         this.loadTable=false;
+       
       })
 
        products.dispatch('getCategories').then(() => {

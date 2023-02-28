@@ -12,8 +12,24 @@ export default new Vuex.Store({
       allCategories:[],
       favorites:[],
       cart:[],
+      formValid:false,
+      valueFields: {
+        cardName: "",
+        cardNumber: "",
+        cardMonth: "",
+        cardYear: "",
+        cardCvv: "",
+      } 
     },
     mutations:{
+      
+      setUpdateForm(state, estado){
+        state.formValid=estado;
+        console.log(state.formValid)
+      },
+       setUpdateCard(state, datos) {
+        state.valueFields = datos;
+      },
         setAllProducts(state, data){
             state.allProducts = data
         },
@@ -27,8 +43,8 @@ export default new Vuex.Store({
         setAddCart(state,payload){
           state.cart= payload
         },
-        deleteProduct(state, id) {
-          state.cart = state.cart.filter(product => product.id !== id);
+        deleteProduct(state, index) {
+          state.cart.splice(index, 1);
         },
         deleteAll(state) {
           state.cart = [];
@@ -51,6 +67,10 @@ export default new Vuex.Store({
     }
     },
     actions:{
+      submitForm({ state }) {
+        // logic to submit form data
+        console.log(state.formData);
+      },
         async getProducts(state) {
             return new Promise(async (resolve, reject) => {
               try {

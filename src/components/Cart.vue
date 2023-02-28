@@ -20,31 +20,33 @@
       
       <tbody>
         <tr
-          v-for="item in cart" :key="item.id" 
+          v-for="(item) in cart" :key="item.id" 
         >
           <td>{{item.id}}</td>
           <td>{{item.title}}</td>
           <td>${{item.precio}}</td>
-          <td><v-btn @click="deleteCart(item.id)"><v-icon>mdi-delete</v-icon></v-btn></td>
+          <td><v-btn @click="deleteCart(index)" icon color="red"><v-icon>mdi-delete</v-icon></v-btn></td>
           </tr>
-      
+       <div class="d-flex justify-star" v-if="totalPriceCart>0">
+          <v-btn @click="deleteAll" color="red" dark>Empty Cart <v-icon>mdi-delete</v-icon></v-btn>
+      </div>
       </tbody>
     </template>
-  </v-simple-table><br>
-  <button @click="deleteAll">Delete Cart</button>
-  <br>
-  <h3 class="text-center" v-if="totalPriceCart>0">Total a pagar US${{totalPriceCart}}</h3>
-    <br>
-     
-    <MultiStepForm />
- 
+  </v-simple-table>
+      <div>
+           <MultiStepForm  v-if="totalPriceCart>0"  />
+      </div>
   
+</div>
+
+
 </div>
   
 </template>
 <script>
 import products from '../store/products';
 import  MultiStepForm from '@/components/commons/ModalForm.vue'
+
 
 
 export default {
