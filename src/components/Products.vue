@@ -10,9 +10,6 @@
          <template v-slot:item.imagen="{ item }">
           <v-img :src="item.imagen" max-width="100"></v-img>
         </template>
-         <template v-slot:item.precio="{ item }">
-          <p>${{item.precio}}</p>
-        </template>
         <template v-slot:item.actions="{ item }">
           <v-btn icon color="pink" @click="addToFavorites(item)">
               <v-icon class="mdi-heart" >mdi-heart</v-icon>
@@ -95,6 +92,7 @@ export default {
 
             allCart(){
               return products.state.cart
+              
             },
 
            filteredProducts() {
@@ -108,25 +106,39 @@ export default {
       },
       methods:{
        addToFavorites(product) {
-          this.showSnackbar = null;
-          this.favs.push(product)
-          products.commit('setAddFavorites', this.favs)
+           // Verificar si el producto ya está en la lista de favoritos
+          if (this.favs.some(p => p.id === product.id)) {
+            this.showSnackbar = true;
+            this.snackbarText = "This product is already in favorites";
+            this.snackbarColor = "violet";
+          return
+          }
+
+          // Agregar el producto a la lista de favoritos
+          this.favs.push(product);
+          products.commit('setAddFavorites', this.favs);
 
           this.showSnackbar = true;
-          this.snackbarText = "Product add to favorites"+product.title;
+          this.snackbarText = "Product added to favorites: " + product.title;
           this.snackbarColor = "red";
           
       },
-      addToCart(product){
-        this.showSnackbar = null;
-        this.cart.push(product)
-        products.commit('setAddCart', this.cart)
-
-        this.showSnackbar = true;
-        this.snackbarText = "Product add to cart"+product.title;
-        this.snackbarColor = "green";
-      
+      addToCart(product) {
+      this.showSnackbar = null;
+      const existingProduct = this.cart.find(p => p.id === product.id);
+      if (existingProduct) {
+        existingProduct.quantity++;
+      } else {
+        product.quantity = 1;
+        this.cart.push(product);
       }
+      products.commit('setAddCart', this.cart);
+
+      this.showSnackbar = true;
+      this.snackbarText = `${product.title} added to cart (${product.quantity} ${product.quantity > 1 ? 'items' : 'item'})`;
+      this.snackbarColor = "green";
+}
+
       }
       
     

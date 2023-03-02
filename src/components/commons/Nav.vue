@@ -22,6 +22,7 @@
           color="red"
           :content="cantFavorites"
           :value="cantFavorites"
+          overlap
         
         >
            <v-icon>mdi-heart</v-icon>
@@ -35,6 +36,7 @@
           color="red"
           :content="cantProducts" 
           :value="cantProducts"
+          overlap
         >
            <v-icon v-if="cantProducts>=0">mdi-cart</v-icon>
         </v-badge>

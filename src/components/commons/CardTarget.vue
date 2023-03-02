@@ -5,27 +5,26 @@
         <vue-paycard :value-fields="valueFields" />
       </v-col>
       <v-col cols="6">
-            <v-form @submit.prevent="validateForm" class="mt-5">
+            <v-form @submit.prevent="submit" class="mt-5" ref="formCard" v-model="value">
     
       <v-text-field v-model="valueFields.cardNumber" label="Card number" required
-      :rules="[rules.required, rules.cardNumber]">
+      :rules="[rules.required, rules.cardNumber.formattedValue]">
       </v-text-field>
        <v-text-field v-model="valueFields.cardName" label="Name on card" 
-       :rules="[rules.required]" required></v-text-field>
+       :rules="[rules.required, rules.cardName]" required></v-text-field>
       <v-row>
         <v-col cols="6">
           <v-text-field v-model="valueFields.cardMonth" label="Expiration month (MM)" required
             :rules="[rules.required, rules.expirationMonth]"></v-text-field>
         </v-col>
         <v-col cols="6">
-          <v-text-field v-model="valueFields.cardYear" label="Expiration year (YY)" 
+          <v-text-field v-model="valueFields.cardYear" label="Expiration year (YYYY)" 
             :rules="[rules.required, rules.expirationYear]" required></v-text-field>
         </v-col>
         <v-col>
           <v-text-field v-model="valueFields.cardCvv" label="CVV" 
           :rules="[rules.required, rules.cvv]" required
           ></v-text-field>
-          <v-btn type="submit">check cart<v-icon>mdi-cash-check</v-icon></v-btn>
         </v-col>
       </v-row>
       
@@ -36,19 +35,12 @@
        
     </v-row>
    
-     
- 
-
-      
-  
-
   </v-container>
 </template>
 
 <script>
 import VuePaycard from 'vue-paycard';
 import products from '@/store/products';
-import { required, maxLength, minLength, numeric, between } from 'vuelidate/lib/validators';
 
 export default {
   components: {
@@ -56,14 +48,8 @@ export default {
   },
   data() {
     return {
+        value:true,
 
-       rules: {
-        required: (value) => !!value || 'Este campo es requerido',
-        cardNumber: (value) => /^([0-9]{4}){3}[0-9]{4}$/.test(value) || 'Ingrese un número de tarjeta de crédito válido',
-        expirationMonth: (value) => /^(0?[1-9]|1[0-2])$/.test(value) || 'Ingrese un mes de vencimiento válido (MM)',
-        expirationYear: (value) => /^20\d{2}$/.test(value) || 'Ingrese un año de vencimiento válido (YYYY)',
-        cvv: (value) => /^[0-9]{3,4}$/.test(value) || 'Ingrese un CVV válido',
-      }
     };
   },
   computed: {
@@ -72,24 +58,22 @@ export default {
   }
   },
   methods: {
+    submit () {
+        this.$refs.formCard.validate()
+        console('hola')
+      },
+    
      
     validateForm(){
-    // Recorrer todos los campos y verificar si cumplen con las reglas de validación
-    for (let field in this.valueFields) {
-      let value = this.valueFields[field];
-      let rules = this.rules[field];
-      if (rules) {
-        for (let rule in rules) {
-          if (!rules[rule](value)) {
-            // Mostrar un mensaje de error y detener la validación si algún campo no es válido
-          
-            donsole.log(error)
-          }
-        }
+      products.state.formValid = this.$refs.formCard.validate()
+     // let valid = this.$refs.form.validate()
+     console('hola'+products.state.formValid)
+      if(products.state.formValid) {
+        console.log("valido")
+
+      } else {
+       console.log("datos invalidos")
       }
-    }
-     console.log("enviado con exito")
-     products.commit('setUpdateForm', true)
   }
 },
   

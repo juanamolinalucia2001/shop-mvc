@@ -25,7 +25,6 @@ export default new Vuex.Store({
       
       setUpdateForm(state, estado){
         state.formValid=estado;
-        console.log(state.formValid)
       },
        setUpdateCard(state, datos) {
         state.valueFields = datos;
@@ -55,12 +54,17 @@ export default new Vuex.Store({
       cartTotal(state){
         let total = 0;
         state.cart.forEach(item => {
-            total += item.precio;
+            total += item.precio*item.quantity;
         });
         return Number(total.toFixed(2));
     },
     cartLength(state){
       return state.cart.length
+     /*  let sum = 0
+      state.cart.forEach(item => {
+          sum+= item.quantity
+      });
+      return sum */
     },
     favoritesLength(state){
       return state.favorites.length

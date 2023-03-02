@@ -30,16 +30,16 @@
 
                   <h1 class="mt-5 mb-5">Monto total a pagar ${{totalPriceCart}}</h1>
 
-                <v-btn @click="step++" outlined color="indigo">Next</v-btn>
+                <v-btn @click="step++" outlined color="green">Next</v-btn>
               </v-container>
             </v-stepper-content>
 
             <!-- Content step 2 -->
             <v-stepper-content step="2">
                 <h2>Enter card details</h2>
-              <CardTarget></CardTarget>
+              <CardCredit/>
                <v-btn @click="step--"  outlined color="indigo">Back</v-btn>
-              <v-btn @click="step++" outlined color="indigo" :disabled="!formValid">Next</v-btn>
+                <v-btn  @click="step++" outlined color="green" :disabled="!formValid">Next</v-btn>
                 
             </v-stepper-content>
 
@@ -70,24 +70,31 @@
 </template>
 
 <script>
-import CardTarget from '@/components/commons/CardTarget.vue'
+import CardCredit from '@/components/commons/CardCredit.vue';
 import products from '@/store/products';
 export default {
+  props: {
+    isValid: Boolean,
+  },
   data() {
     return {
       showModal: false,
       step: 1,
     }
+    
   },
    components:{
-    CardTarget
+    CardCredit
   },
   methods: {
     submitForm() {
       this.showModal = false
       this.step=1
       this.deleteAll
-    }
+    },
+    submit() {
+      // Lógica para enviar el formulario
+    },
   },
   computed:{
      totalPriceCart(){

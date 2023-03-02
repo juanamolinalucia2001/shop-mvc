@@ -11,7 +11,7 @@
 <script>
 import Products from '@/components/Products.vue'
 import Carrusel from '@/components/commons/Carrusel.vue'
-import Card from '@/components/commons/CardTarget.vue'
+import Card from '@/components/commons/Prueba.vue'
 
 
   export default {
