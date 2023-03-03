@@ -10,7 +10,7 @@
     <v-text-field
       v-model="valueFields.cardName"
       :error-messages="cardNameErrors"
-      label="Card Name"
+      :label="$tc('formCard.cardName')" 
       required
       @input="$v.valueFields.cardName.$touch()"
       @blur="$v.valueFields.cardName.$touch()"
@@ -19,7 +19,7 @@
     <v-text-field
       v-model="valueFields.cardNumber"
       :error-messages="cardNumberErrors"
-      label="Card Number"
+      :label="$tc('formCard.cardNumber')" 
          v-mask="'####-####-####-####'"
       required
       @input="$v.valueFields.cardNumber.$touch()"
@@ -31,7 +31,7 @@
         <v-text-field
           v-model="valueFields.cardMonth"
           :error-messages="cardMonthErrors"
-          label="Expiration Month"
+          :label="$tc('formCard.cardMonth')" 
           required
          
           @input="$v.valueFields.cardMonth.$touch()"
@@ -42,7 +42,7 @@
         <v-text-field
           v-model="valueFields.cardYear"
           :error-messages="cardYearErrors"
-          label="Expiration Year"
+          :label="$tc('formCard.cardYear')" 
           required
           @input="$v.valueFields.cardYear.$touch()"
           @blur="$v.valueFields.cardYear.$touch()"
@@ -53,7 +53,8 @@
     <v-text-field
       v-model="valueFields.cardCvv"
       :error-messages="cardCvvErrors"
-      label="CVV"
+      :label="$tc('formCard.cvv')" 
+       v-mask="'####'"
       required
       @input="$v.valueFields.cardCvv.$touch()"
       @blur="$v.valueFields.cardCvv.$touch()"
@@ -121,37 +122,37 @@
   cardNameErrors () {
     const errors = []
     if (!this.$v.valueFields.cardName.$dirty) return errors
-    !this.$v.valueFields.cardName.required && errors.push('Card Name is required')
-    !this.$v.valueFields.cardName.alpha && errors.push('Card Name only chart')
+    !this.$v.valueFields.cardName.required && errors.push(this.$tc('validationsCardText.required'))
+    !this.$v.valueFields.cardName.alpha && errors.push(this.$tc('validationsCardText.cardName'))
     return errors
   },
   cardNumberErrors () {
     const errors = []
     if (!this.$v.valueFields.cardNumber.$dirty) return errors
-    !this.$v.valueFields.cardNumber.required && errors.push('Card Number is required')
-    !this.$v.valueFields.cardNumber.minLength && errors.push('Card Number must be 16 digits')
-    !this.$v.valueFields.cardNumber.maxLength && errors.push('Card Number must be 16 digits')
+    !this.$v.valueFields.cardNumber.required && errors.push(this.$tc('validationsCardText.required'))
+    !this.$v.valueFields.cardNumber.minLength && errors.push(this.$tc('validationsCardText.cardNumber'))
+    !this.$v.valueFields.cardNumber.maxLength && errors.push(this.$tc('validationsCardText.cardNumber'))
     return errors
   },
   cardMonthErrors() {
     const errors = [];
     if (!this.$v.valueFields.cardMonth.$dirty) return errors;
-    !this.$v.valueFields.cardMonth.required && errors.push("Month is required");
-    !this.$v.valueFields.cardMonth.between && errors.push("Month must be between 1 and 12");
+    !this.$v.valueFields.cardMonth.required && errors.push(this.$tc('validationsCardText.required'));
+    !this.$v.valueFields.cardMonth.between && errors.push(this.$tc('validationsCardText.cardMonth'));
     return errors;
   },
   cardYearErrors() {
     const errors = [];
     if (!this.$v.valueFields.cardYear.$dirty) return errors;
-    !this.$v.valueFields.cardYear.required && errors.push("Year is required");
-    !this.$v.valueFields.cardYear.between && errors.push("Year must be between 2023 and 2040(yyyy)");
+    !this.$v.valueFields.cardYear.required && errors.push(this.$tc('validationsCardText.required'));
+    !this.$v.valueFields.cardYear.between && errors.push(this.$tc('validationsCardText.cardYear'));
     return errors;
   },
   cardCvvErrors() {
     const errors = [];
     if (!this.$v.valueFields.cardCvv.$dirty) return errors;
-    !this.$v.valueFields.cardCvv.required && errors.push("CVV is required");
-    !this.$v.valueFields.cardCvv.maxLength && errors.push("CVV must be 3 or 4 digits");
+    !this.$v.valueFields.cardCvv.required && errors.push(this.$tc('validationsCardText.required'));
+    !this.$v.valueFields.cardCvv.maxLength && errors.push(this.$tc('validationsCardText.cvv'));
     return errors;
   },
 },

@@ -31,9 +31,9 @@
     data: () => ({
       links: [
         {id:1,view:'Home',link:'/'},
-        {id:2,view:'Cart', link:'/cart'},
-        {id:3,view:'Favorites', link:'/favorites'},
-        {id:4,view:'Products', link:'/products'}
+        {id:2,view:'Carrito', link:'/cart'},
+        {id:3,view:'Favoritos', link:'/favorites'},
+        {id:4,view:'Productos', link:'/products'}
       ],
     }),
   }

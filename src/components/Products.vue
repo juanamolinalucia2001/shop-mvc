@@ -44,12 +44,12 @@ export default {
         snackbarColor: "",
         showSnackbar:false,
         headers: [
-        { text: 'Product', value: 'title' },
-        {text:'Imagen', value:'imagen'}, 
-        { text: 'Descripción', value: 'descripcion' },
-        { text: 'Price', value: 'precio' },
-        { text: 'Category', value: 'categoria' },
-        { text: 'Actions', value: 'actions', sortable: false },
+        { text: this.$tc('products.nameProduct'), value: 'title' },
+        {text:this.$tc('products.image'), value:'imagen'}, 
+        { text:this.$tc('products.description'), value: 'descripcion' },
+        { text:this.$tc('products.price'), value: 'precio' },
+        { text:this.$tc('products.category'), value: 'categoria' },
+        { text: this.$tc('products.actions'), value: 'actions', sortable: false },
       ],
       loadTable:true
       

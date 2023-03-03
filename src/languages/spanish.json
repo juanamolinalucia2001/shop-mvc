@@ -1,19 +1,56 @@
 {
     "products":{
-        "nameProduct":"Nombre",
+        "title":"Productos",
+        "nameProduct":"Nombre Producto",
         "description":"Descripción",
         "category":"Categoria",
         "price":"Precio",
-        "image":"Imagen"
+        "image":"Imagen",
+        "actions":"Acciones",
+        "buy":"Comprar productos"
+    },
+    "cart":{
+        "title":"Carrito",
+        "quantity":"Cantidad",
+        "nameProduct":"Nombre Producto",
+        "price":"Precio",
+        "actions":"Acciones",
+        "empty":"Vaciar Carrito"
+
+
+    },
+    "favorites":{
+        "title":"Favoritos"
     },
     "footer":{
-        "Home":"Inicio",
-        "Cart":"Carrito",
-        "Favorites":"Favoritos",
-        "Products":"Productos"
+        "home":"Inicio",
+        "cart":"Carrito",
+        "favorites":"Favoritos",
+        "products":"Productos"
 
     },
     "nav":{
-        "title":"Eccomerce"
+        "title":"Shopping-Online"
+    },
+    "multiStep":{
+        "buyProducts":"Pagar",
+        "btnNext":"Siguiente",
+        "btnBack":"Anterior",
+        "step2":"Ingrese datos de la tarjeta"
+    },
+    "formCard":{
+        "cardName":"Nombre del propietario",
+        "cardNumber":"Nro tarjeta",
+        "cardMonth":"Mes de Vecimiento",
+        "cardYear":"Año de Vecimiento",
+        "cvv":"CVV"
+    },
+    "validationsCardText":{
+        "required":"Campo requerido",
+        "cardName":"Solo se aceptan caracteres",
+        "cardNumber":"Nro tarjeta debe tener 16 digitos",
+        "cardMonth":"El mes debe estar entre 1 y 12",
+        "cardYear":"El año debe estar entre 2023 y 2040",
+        "cvv":"CVV"
     }
 }

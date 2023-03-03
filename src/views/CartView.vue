@@ -1,6 +1,6 @@
 <template>
   <div class="mt-2">
-    <h1 class="mt-5 text-center">Cart</h1>
+    <h1 class="mt-5 text-center">{{$tc('cart.title')}}</h1>
       <Cart></Cart>
   </div>
 </template>

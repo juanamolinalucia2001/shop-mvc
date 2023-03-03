@@ -5,15 +5,17 @@
       <thead>
         <tr>
           <th class="text-left">
-            Quantity
+            {{ $tc('cart.quantity')}}
           </th>
           <th class="text-left">
-            Title
+              {{ $tc('cart.nameProduct')}}
           </th>
           <th>
-            Price
+            {{ $tc('cart.price')}}
           </th>
-          <th>Actions</th>
+          <th>
+            {{ $tc('cart.actions')}}
+          </th>
          
         </tr>
       </thead>
@@ -28,7 +30,7 @@
           <td><v-btn @click="deleteCart(index)" icon color="red"><v-icon>mdi-delete</v-icon></v-btn></td>
           </tr>
        <div class="d-flex justify-star" v-if="totalPriceCart>0">
-          <v-btn @click="deleteAll" color="red" dark>Empty Cart <v-icon>mdi-delete</v-icon></v-btn>
+          <v-btn @click="deleteAll" color="red" dark>{{ $tc('cart.empty')}} <v-icon>mdi-delete</v-icon></v-btn>
       </div>
       </tbody>
     </template>

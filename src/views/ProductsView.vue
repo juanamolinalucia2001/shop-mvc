@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <h1 class="mt-5  text-center">Products</h1>
+    <h1 class="mt-5  text-center">{{ $tc('products.title')}} </h1>
     <Products></Products>
 
 

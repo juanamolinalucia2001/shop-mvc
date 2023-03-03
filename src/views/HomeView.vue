@@ -1,7 +1,7 @@
 <template>
   <v-container class="mt-3 text-center">
     <Carrusel/>
-    <v-btn to="/products" class="yellow" block>Buy Products <v-icon>mdi-cart</v-icon></v-btn>
+    <v-btn to="/products" class="yellow" block>{{ $tc('products.buy')}} <v-icon>mdi-cart</v-icon></v-btn>
     <br>
 
   </v-container>

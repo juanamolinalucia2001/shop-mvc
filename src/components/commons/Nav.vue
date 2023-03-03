@@ -5,7 +5,7 @@
     <v-toolbar dense class="yellow" >
       <!-- <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon> -->
 
-      <v-toolbar-title>{{ $tc("nav.title") }}</v-toolbar-title>
+      <v-toolbar-title>{{ $tc('nav.title') }}</v-toolbar-title>
 
     <v-spacer></v-spacer>
      

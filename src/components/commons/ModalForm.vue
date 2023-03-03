@@ -9,7 +9,7 @@
           v-bind="attrs"
           v-on="on"
         >
-          Pay
+          {{ $tc('multiStep.buyProducts')}}
         </v-btn>
       </template>
         <div>
@@ -30,16 +30,16 @@
 
                   <h1 class="mt-5 mb-5">Monto total a pagar ${{totalPriceCart}}</h1>
 
-                <v-btn @click="step++" outlined color="green">Next</v-btn>
+                <v-btn @click="step++" outlined color="green">{{ $tc('multiStep.btnNext')}}</v-btn>
               </v-container>
             </v-stepper-content>
 
             <!-- Content step 2 -->
             <v-stepper-content step="2">
-                <h2>Enter card details</h2>
+                <h2>{{$tc('multiStep.step2')}}</h2>
               <CardCredit/>
-               <v-btn @click="step--"  outlined color="indigo">Back</v-btn>
-                <v-btn  @click="step++" outlined color="green" :disabled="!formValid">Next</v-btn>
+               <v-btn @click="step--"  outlined color="indigo">{{ $tc('multiStep.btnBack')}}</v-btn>
+                <v-btn  @click="step++" outlined color="green" :disabled="!formValid">{{ $tc('multiStep.btnNext')}}</v-btn>
                 
             </v-stepper-content>
 

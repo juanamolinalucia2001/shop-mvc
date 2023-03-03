@@ -8,7 +8,7 @@ import Vuelidate from 'vuelidate'
 Vue.use(Vuelidate)
 import VueMask from 'v-mask'
 Vue.use(VueMask);
-import i18n from "@/plugins/i18n";
+import i18n from '@/plugins/i18n'
 
 
 Vue.config.productionTip = false
