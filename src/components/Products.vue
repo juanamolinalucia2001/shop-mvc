@@ -23,7 +23,7 @@
 
   
       <Snackbar
-      :show="showSnackbar"
+      :alert="showSnackbar"
       :text="snackbarText"
       :color="snackbarColor"
     />
@@ -111,6 +111,7 @@ export default {
             this.showSnackbar = true;
             this.snackbarText = "This product is already in favorites";
             this.snackbarColor = "violet";
+            setTimeout(()=>this.showSnackbar=false,1000)
           return
           }
 
@@ -121,10 +122,11 @@ export default {
           this.showSnackbar = true;
           this.snackbarText = "Product added to favorites: " + product.title;
           this.snackbarColor = "red";
+          setTimeout(()=>this.showSnackbar=false,1000)
           
       },
       addToCart(product) {
-      this.showSnackbar = null;
+
       const existingProduct = this.cart.find(p => p.id === product.id);
       if (existingProduct) {
         existingProduct.quantity++;
@@ -133,14 +135,15 @@ export default {
         this.cart.push(product);
       }
       products.commit('setAddCart', this.cart);
-
+      
       this.showSnackbar = true;
       this.snackbarText = `${product.title} added to cart (${product.quantity} ${product.quantity > 1 ? 'items' : 'item'})`;
       this.snackbarColor = "green";
-}
+      setTimeout(()=>{this.showSnackbar=false},"1500")
+    },
 
+   
       }
-      
     
 }
 </script>

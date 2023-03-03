@@ -1,0 +1,19 @@
+{
+    "products":{
+        "nameProduct":"Nombre",
+        "description":"Descripción",
+        "category":"Categoria",
+        "price":"Precio",
+        "image":"Imagen"
+    },
+    "footer":{
+        "Home":"Inicio",
+        "Cart":"Carrito",
+        "Favorites":"Favoritos",
+        "Products":"Productos"
+
+    },
+    "nav":{
+        "title":"Eccomerce"
+    }
+}

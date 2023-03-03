@@ -1,17 +1,13 @@
 <template>
-  <v-snackbar :color="color" v-model="show" :timeout="1000" >
+  <v-snackbar v-model="alerta" :color="color"  timeout="1000" >
     {{ text }}
-    <template v-slot:action="{ attrs }">
-      <v-btn text v-bind="attrs" @click="show = false">
-        Close
-      </v-btn>
-    </template>
+
   </v-snackbar>
 </template>
 <script>
 export default {
   props: {
-    show: Boolean,
+    alert:Boolean,
     text: String,
     color: String,
   },
@@ -20,5 +16,17 @@ export default {
 
     };
   },
+  computed:{
+    alerta:{
+            get(){
+                return this.alert
+            },
+            set(newValue){
+              console.log(newValue)
+               return newValue
+               
+            }
+        }
+  }
 };
 </script>

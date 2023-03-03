@@ -13,6 +13,7 @@ export default new Vuex.Store({
       favorites:[],
       cart:[],
       formValid:false,
+      cartLength:0,
       valueFields: {
         cardName: "",
         cardNumber: "",
@@ -23,8 +24,10 @@ export default new Vuex.Store({
     },
     mutations:{
       
+      
       setUpdateForm(state, estado){
         state.formValid=estado;
+
       },
        setUpdateCard(state, datos) {
         state.valueFields = datos;
@@ -41,12 +44,16 @@ export default new Vuex.Store({
         },
         setAddCart(state,payload){
           state.cart= payload
+          state.cartLength++
         },
         deleteProduct(state, index) {
           state.cart.splice(index, 1);
         },
         deleteAll(state) {
           state.cart = [];
+        },
+        sumProductCart(state){
+          state.cartLength+=1
         }
 
     },
@@ -58,14 +65,7 @@ export default new Vuex.Store({
         });
         return Number(total.toFixed(2));
     },
-    cartLength(state){
-      return state.cart.length
-     /*  let sum = 0
-      state.cart.forEach(item => {
-          sum+= item.quantity
-      });
-      return sum */
-    },
+  
     favoritesLength(state){
       return state.favorites.length
     }
@@ -75,6 +75,7 @@ export default new Vuex.Store({
         // logic to submit form data
         console.log(state.formData);
       },
+     
         async getProducts(state) {
             return new Promise(async (resolve, reject) => {
               try {

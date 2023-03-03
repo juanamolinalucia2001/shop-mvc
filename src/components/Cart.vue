@@ -65,9 +65,7 @@ export default {
             totalPriceCart(){
                 return products.getters.cartTotal
             },
-            cantidadProducts(){
-                return products.getters.cartLength
-            }
+           
 
       },
     methods:{
