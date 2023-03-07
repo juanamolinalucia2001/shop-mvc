@@ -9,7 +9,24 @@ Vue.use(Vuelidate)
 import VueMask from 'v-mask'
 Vue.use(VueMask);
 import i18n from '@/plugins/i18n'
+import { auth } from "./firebase";
 
+
+auth.onAuthStateChanged((user) => {
+  if (user) {
+    console.log(user);
+    const detectedUser = {
+      name: user.displayName,
+      email: user.email,
+      uid: user.uid,
+      photosrc: user.photoURL,
+      provider: user.providerData[0].providerId
+    };
+    store.dispatch("detectUser", detectedUser);
+  } else {
+    store.dispatch("detectUser", user);
+  }
+})
 
 Vue.config.productionTip = false
 

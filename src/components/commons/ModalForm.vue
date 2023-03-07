@@ -39,7 +39,7 @@
                 <h2>{{$tc('multiStep.step2')}}</h2>
               <CardCredit/>
                <v-btn @click="step--"  outlined color="indigo">{{ $tc('multiStep.btnBack')}}</v-btn>
-                <v-btn  @click="step++" outlined color="green" :disabled="!formValid">{{ $tc('multiStep.btnNext')}}</v-btn>
+                <v-btn  @click="agregarCompra();" outlined color="green" :disabled="!formValid">{{ $tc('multiStep.btnNext')}}</v-btn>
                 
             </v-stepper-content>
 
@@ -48,12 +48,14 @@
                 <v-container class="text-center">
                   <v-row>
                     <v-col cols="12">
+                         {{cart}}
                       <h1>Pago realizado con exito</h1>
                        <v-img class="mb-5" style="margin: auto;" width="150" src="https://gifdb.com/images/thumbnail/correct-verified-green-circle-check-mark-a8cbemi51csojpmt.gif"></v-img>
                       
                     </v-col>
                     <v-col cols="12" class="mt-5">
                        <h2>Gracias por tu compra</h2>
+                    
                     </v-col>
                     <v-col>
                         <v-btn @click="submitForm" outlined color="red">Close</v-btn>
@@ -72,6 +74,8 @@
 <script>
 import CardCredit from '@/components/commons/CardCredit.vue';
 import products from '@/store/products';
+import { mapState, mapActions} from "vuex";
+
 export default {
   props: {
     isValid: Boolean,
@@ -87,6 +91,7 @@ export default {
     CardCredit
   },
   methods: {
+     ...mapActions(['agregarProducto']),
     submitForm() {
       this.showModal = false
       this.step=1
@@ -95,8 +100,19 @@ export default {
     submit() {
       // Lógica para enviar el formulario
     },
+    agregarCompra(){
+      this.step++;
+      let lista=[];
+      lista.push(this.cart);
+      console.log(lista);
+      this.agregarProducto({ compra: lista, uid: this.user.uid, photourl: this.user.photosrc  })
+
+    },
+  
+   
   },
   computed:{
+     
      totalPriceCart(){
                 return products.getters.cartTotal
             },
@@ -105,7 +121,13 @@ export default {
       },
       deleteAll(){
         products.commit('deleteAll')
-      }
+      },
+      cart(){
+              return products.state.cart
+        },
+      ...mapState(["user"])
+      
+      
   }
 }
 </script>

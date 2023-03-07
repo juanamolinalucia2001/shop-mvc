@@ -1,7 +1,10 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import service from '../services/ products'
+import {db, auth} from '@/firebase'
+import router from '@/router'
 import products from "@/Models/products";
+
 
 Vue.use(Vuex)
 
@@ -12,6 +15,7 @@ export default new Vuex.Store({
       allCategories:[],
       favorites:[],
       cart:[],
+      allStock: [],
       formValid:false,
       cartLength:0,
       valueFields: {
@@ -20,7 +24,7 @@ export default new Vuex.Store({
         cardMonth: "",
         cardYear: "",
         cardCvv: "",
-      } 
+      }
     },
     mutations:{
       
@@ -38,6 +42,9 @@ export default new Vuex.Store({
         setAllCategories(state,data){
           state.allCategories = data
         },
+        setAllStock(state, data) {
+          state.allStock = data;
+        },
         //add product to list favs
         setAddFavorites(state,payload){
           state.favorites= payload
@@ -54,6 +61,12 @@ export default new Vuex.Store({
         },
         sumProductCart(state){
           state.cartLength+=1
+        },
+        setUsuario(state, payload){
+          state.usuario=payload
+        },
+        setError(state, payload){
+          state.error=payload
         }
 
     },
@@ -103,9 +116,27 @@ export default new Vuex.Store({
               }
             });
           },
+
+          async getStock(state) {
+            return new Promise(async (resolve, reject) => {
+              try {
+                let item = await state.state.service.getAllStock();
+                console.log("store stock:", item);
+                state.commit("setAllStock", item);
+                resolve(true);
+              } catch (error) {
+                reject(error);
+              }
+            });
+          },
+
         deleteProduct({ commit }, id) {
             commit('deleteProduct', id);
-        }
-    }
+        },
+        
+
+        
+
+      }
   
 })

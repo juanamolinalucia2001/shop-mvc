@@ -42,6 +42,13 @@
         </v-badge>
         
       </v-btn>
+
+       <v-btn color="indigo" text v-if="userExists" :to="{ path: 'profile' }"
+          ><v-avatar color="#d9d9d9" size="24" class="mr-1"><img :src="user.photosrc"/> </v-avatar>{{user.email}}</v-btn
+        >
+        <v-btn @click="signOut()" text v-if="userExists" color="red"
+          ><v-icon class="mr-1">mdi-logout</v-icon>cerrar sesión</v-btn
+        >
   
     </v-toolbar>
 
@@ -52,6 +59,7 @@
 
 <script>
 import products from '@/store/products';
+import { mapState, mapActions, mapGetters } from "vuex"
  export default {
     name: 'Nav',
     data: function () {
@@ -65,7 +73,12 @@ import products from '@/store/products';
         },
          cantProducts(){
           return products.state.cartLength
-        }
+        },
+    ...mapGetters(["userExists"]),
+    ...mapState(["user"])
     },
+     methods: {
+    ...mapActions(["signOut"]),
+  },
   }
 </script>

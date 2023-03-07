@@ -59,20 +59,20 @@ export default {
     Snackbar,
     },
      mounted() {
-      //hace un pedido de los productos
+
+    //realiza una solicitud para obtener una lista de productos.
       products.dispatch('getProducts').then(() => {
-       
         console.log('productos cargados')
          this.loadTable=false;
-       
-      })
+      });
 
+    //realiza una solicitud para obtener una lista de categorías de productos.
        products.dispatch('getCategories').then(() => {
         console.log('categorias')
-      })
+      });
 
-     
-
+    //realiza una solicitud para obtener una lista de el stock de productos.
+      products.dispatch("getStock").then(() => {});
 
       
       },
