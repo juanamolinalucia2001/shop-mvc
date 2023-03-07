@@ -14,8 +14,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    compras: [],
-    compra: { id: "",name: "", category:"",quantity:""},
+   
     snackBarAlerts: [],
     user: null,
     error: null,
@@ -94,35 +93,33 @@ export default new Vuex.Store({
           }, 1000)
         });
     },
-    agregarProducto({ commit, state }, {compra, uid, photourl}) {
-      const userRef = db.collection('users').doc(state.user.email);
-      const comprasRef = userRef.collection('compras');
+    
+    agregarProducto({ commit, state }, { compra, uid, photourl }) {
+      const userRef = db.collection("users").doc(state.user.email);
+      const comprasRef = userRef.collection("compras");
       const fecha = new Date(); // Obtiene la fecha actual
 
-    
-      const productos = compra.map(item => {
+      compra.forEach((item) => {
         const itemJSON = JSON.parse(JSON.stringify(item));
-        const itemObject = { ...itemJSON }; // Convertir array en objeto
-        return itemObject;
+        const itemObject = { ...itemJSON };
+
+        comprasRef
+          .add({
+            fecha: fecha,
+            uid: uid,
+            photourl: photourl,
+            productos: itemObject,
+          })
+          .then((docRef) => {
+            console.log("El producto se agregó con éxito:", docRef.id);
+          })
+          .catch((error) => {
+            console.error("Error al agregar el producto al carrito:", error);
+          });
       });
-    
-      comprasRef.add({
-        fecha: fecha,
-        uid: uid,
-        photourl:photourl,
-        productos: productos // Agrega el arreglo con los elementos de la compra
-      })
-      .then((docRef) => {
-        // El producto se agregó con éxito
-        router.push('/products');
-      })
-      .catch((error) => {
-        // Ocurrió un error al agregar el producto
-        console.error('Error al agregar el producto al carrito: ', error);
-      });
-    }
-    , 
-    
+
+      router.push("/products");
+    },
     
     
     

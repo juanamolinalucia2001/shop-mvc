@@ -22,12 +22,12 @@
       
       <tbody>
         <tr
-          v-for="(item) in cart" :key="item.id" 
+          v-for="(item, index) in cart" :key="item.id" 
         >
           <td>{{item.quantity}}</td>
           <td>{{item.title}}</td>
           <td>${{item.precio*item.quantity}}</td>
-          <td><v-btn @click="deleteCart(index)" icon color="red"><v-icon>mdi-delete</v-icon></v-btn></td>
+          <td><v-btn @click="deleteItem(index, item.quantity)" icon color="red"><v-icon>mdi-delete</v-icon></v-btn></td>
           </tr>
        <div class="d-flex justify-star" v-if="totalPriceCart>0">
           <v-btn @click="deleteAll" color="red" dark>{{ $tc('cart.empty')}} <v-icon>mdi-delete</v-icon></v-btn>
@@ -67,12 +67,13 @@ export default {
             totalPriceCart(){
                 return products.getters.cartTotal
             },
+
            
 
       },
     methods:{
-      deleteCart(index){
-        products.commit('deleteProduct', index)
+        deleteItem(index, cantidad){
+        products.commit('deleteProduct', {index, cantidad})
       },
       deleteAll(){
         products.commit('deleteAll')

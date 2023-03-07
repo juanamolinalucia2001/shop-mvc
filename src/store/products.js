@@ -53,11 +53,13 @@ export default new Vuex.Store({
           state.cart= payload
           state.cartLength++
         },
-        deleteProduct(state, index) {
+        deleteProduct(state, { index, cantidad }) {
           state.cart.splice(index, 1);
+          state.cartLength -= cantidad;
         },
         deleteAll(state) {
           state.cart = [];
+          state.cartLength=0
         },
         sumProductCart(state){
           state.cartLength+=1

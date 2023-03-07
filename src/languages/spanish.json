@@ -7,7 +7,8 @@
         "price":"Precio",
         "image":"Imagen",
         "actions":"Acciones",
-        "buy":"Comprar productos"
+        "buy":"Comprar productos",
+        "stock":"Stock"
     },
     "cart":{
         "title":"Carrito",

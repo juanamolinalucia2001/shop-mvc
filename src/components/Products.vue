@@ -18,6 +18,14 @@
              + <v-icon class="mdi-cart" >mdi-cart</v-icon>
             </v-btn>
         </template>
+         <template v-slot:item.stock="{item}" >
+
+           <div v-for="stock in allStock" :key="stock.id">
+            <p class="ms-4" v-if="stock.id === item.id">
+             {{ stock.stock }}
+            </p>
+          </div>
+        </template>
       </v-data-table>
         
 
@@ -49,6 +57,7 @@ export default {
         { text:this.$tc('products.description'), value: 'descripcion' },
         { text:this.$tc('products.price'), value: 'precio' },
         { text:this.$tc('products.category'), value: 'categoria' },
+        { text:this.$tc('products.stock'), value: 'stock' },
         { text: this.$tc('products.actions'), value: 'actions', sortable: false },
       ],
       loadTable:true
@@ -72,7 +81,9 @@ export default {
       });
 
     //realiza una solicitud para obtener una lista de el stock de productos.
-      products.dispatch("getStock").then(() => {});
+      products.dispatch("getStock").then(() => {
+        console.log("cargo stock")
+      });
 
       
       },
@@ -83,6 +94,9 @@ export default {
             },
             categories(){
                 return products.state.allCategories
+            },
+            allStock(){
+                return products.state.allStock
             },
             
             allFavs(){
