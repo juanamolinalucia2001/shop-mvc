@@ -42,13 +42,56 @@
         </v-badge>
         
       </v-btn>
+       
+      <v-menu
+        v-model="menu"
+        :close-on-content-click="false"
+        :nudge-width="150"
+        offset-y
+        v-if="userExists"
+      >
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            text
+            v-bind="attrs"
+            v-on="on"
+          >
+              <v-avatar size="30" class="d-flex  align-center justify-center">
+                <img :src="user.photosrc"/>
+            </v-avatar>
+          </v-btn>
+        </template>
+  
+        <v-card >
+          <v-list>
+            <v-list-item class="d-flex justify-center mt-5" >
+             <v-avatar color="#d9d9d9" size="40" class="d-flex  align-center justify-center">
+              <img :src="user.photosrc"/>
+            </v-avatar>
+            </v-list-item>
+  
+            <v-list-item-content class="text-center">
+                <v-list-item-title><h5>{{user.name}}</h5></v-list-item-title>
+                <v-list-item-subtitle>{{user.email}}</v-list-item-subtitle>
+            </v-list-item-content>
+  
+        
+          </v-list>
+  
+          <v-divider></v-divider>
+  
+          <v-list>
+           <v-btn @click="signOut(); menu=false" text v-if="userExists" block>
+            <v-icon>mdi-logout</v-icon>Cerrar sesión
+          </v-btn>
+          
+          </v-list>
+            
+        </v-card>
+      </v-menu>
 
-       <v-btn color="indigo" text v-if="userExists" :to="{ path: 'profile' }"
-          ><v-avatar color="#d9d9d9" size="24" class="mr-1"><img :src="user.photosrc"/> </v-avatar>{{user.email}}</v-btn
-        >
-        <v-btn @click="signOut()" text v-if="userExists" color="red"
-          ><v-icon class="mr-1">mdi-logout</v-icon>cerrar sesión</v-btn
-        >
+
+    
   
     </v-toolbar>
 
@@ -65,6 +108,7 @@ import { mapState, mapActions, mapGetters } from "vuex"
     data: function () {
     return {
       drawer: false,
+      menu: false,
       // otras propiedades y métodos
     }},
     computed:{

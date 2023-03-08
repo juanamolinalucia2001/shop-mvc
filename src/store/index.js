@@ -7,7 +7,7 @@ import {
   GoogleAuthProvider,
   FacebookAuthProvider,
   GithubAuthProvider,
-} from "../firebase";
+} from "@/firebase" ;
 import router from "../router";
 
 Vue.use(Vuex);
@@ -93,8 +93,33 @@ export default new Vuex.Store({
           }, 1000)
         });
     },
+    async updateStock({commit},productsList) {
+      console.log(productsList)
+      const stocks = db.collection("stock");
     
-    agregarProducto({ commit, state }, { compra, uid, photourl }) {
+      for (const item of productsList) {
+        const querySnapshot = await stocks.where("id", "==", item.id).get();
+    
+        querySnapshot.forEach(async (doc) => {
+          if (doc.exists) {
+            const docRef = stocks.doc(doc.id);
+            const newQuantity = doc.data().stock - item.quantity;
+    
+            await docRef.update({ stock: newQuantity });
+            console.log(`Stock de ${item.id} actualizado exitosamente.`);
+          } else {
+            console.log(`No se encontró un producto con la id: ${item.id}`);
+          }
+        });
+      }
+    }
+    ,
+    
+    
+    
+  
+    //agregar compra a firebase
+    agregarProducto({ commit, state }, { compra, uid, photourl, displayName, email, provider }) {
       const userRef = db.collection("users").doc(state.user.email);
       const comprasRef = userRef.collection("compras");
       const fecha = new Date(); // Obtiene la fecha actual
@@ -108,6 +133,9 @@ export default new Vuex.Store({
             fecha: fecha,
             uid: uid,
             photourl: photourl,
+            displayName: displayName,
+            email: email,
+            provider:provider,
             productos: itemObject,
           })
           .then((docRef) => {
@@ -117,15 +145,11 @@ export default new Vuex.Store({
             console.error("Error al agregar el producto al carrito:", error);
           });
       });
+    },
+    
 
-      router.push("/products");
-    },
-    
-    
-    
-    searchTasks({commit, state}, payload) {
-      state.searchText = payload.toLowerCase();
-    },
+
+    //register user
     createUser({ commit }, credentials) {
       auth
         .createUserWithEmailAndPassword(credentials.email, credentials.passwd)
@@ -151,6 +175,7 @@ export default new Vuex.Store({
           commit("setError", err.code);
         });
     },
+    //login
     signIn({ commit }, { provider, credentials }) {
       let authPromise = null;
       if (provider === "email") {
@@ -190,7 +215,7 @@ export default new Vuex.Store({
 
     signOut({ commit }) {
       auth.signOut().then(() => {
-        router.push("/login");
+        router.push("/");
       });
     },
     detectUser({ commit }, user) {
@@ -231,19 +256,7 @@ export default new Vuex.Store({
       } else {
         return true;
       }
-    },
-    tasksFiltered(state){
-      let tasks = [];
-      for(let task of state.tasks) {
-        if (task && task.name) {
-          let name = task.name.toLowerCase();
-          if(name.indexOf(state.searchText) >= 0) {
-            tasks.push(task);
-          }
-        }
-      }
-      return tasks;
-    }   
+    }, 
   },
   modules: {},
 });

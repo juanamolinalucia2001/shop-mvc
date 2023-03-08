@@ -1,8 +1,7 @@
 <template>
-  <v-container class="">
-    <v-row>
+  <v-container class="text-center mt-5">
+    <v-row >
       <v-container class="formLoginContainer">
-        <h1 class="text-center">Acceso</h1>
         <br />
         <v-form
           @submit.prevent="
@@ -11,16 +10,22 @@
               credentials: { email: $v.email.$model, passwd: $v.passwd.$model },
             })
           "
-        >
+        >  
+        <div class="d-flex">
           <v-text-field
+            class="flex-grow-1"
             color="indigo"
             outlined
             type="email"
-            placeholder="Ingrese su correo electŕonico"
+            placeholder="Ingrese su correo"
             v-model="$v.email.$model"
-            append-icon="mdi-account"
             :rules="rulesEmail"
           />
+           <v-btn icon class="ml-2 mt-2">
+           <v-icon>mdi-cart</v-icon>
+           </v-btn>
+          
+        </div>
           <div class="d-flex">
             <v-text-field
               class="flex-grow-1"
@@ -29,7 +34,6 @@
               :type="showPassword ? 'text' : 'password'"
               placeholder="Ingrese su contraseña"
               v-model="$v.passwd.$model"
-              append-icon="mdi-lock"
               :rules="rulesPasswd"
             />
             <v-btn
@@ -44,7 +48,7 @@
           <v-btn
             :disabled="$v.$invalid"
             style="color: #ffffff"
-            color="#3f51b5"
+            color="yellow accent-4"
             type="submit"
             >Ingresar</v-btn
           >
@@ -72,32 +76,7 @@
           intentos fallidos.
         </p>
         <br />
-        <v-divider :thickness="4"></v-divider>
-        <v-container>
-          <div class="mx-auto text-center">
-            <v-btn
-              @click="signIn({ provider: 'google' })"
-              x-large
-              icon
-              color="#3f51b5"
-              ><v-icon>mdi-google</v-icon></v-btn
-            >
-            <v-btn
-              @click="signIn({ provider: 'github' })"
-              x-large
-              icon
-              color="#3f51b5"
-              ><v-icon>mdi-github</v-icon></v-btn
-            >
-            <v-btn
-              @click="signIn({ provider: 'facebook' })"
-              x-large
-              icon
-              color="#3f51b5"
-              ><v-icon>mdi-facebook</v-icon></v-btn
-            >
-          </div>
-        </v-container>
+      
       </v-container>
     </v-row>
   </v-container>
@@ -144,7 +123,6 @@ export default {
       }
       
     `;
-    document.head.appendChild(style);
   },
 
   updated() {
@@ -200,7 +178,11 @@ export default {
 
 <style scoped>
 .text-field-wrapper {
-  width: 100%;
+  width: 80%;
   display: inline-block;
+}
+.formLoginContainer{
+  max-width: 600px;
+  
 }
 </style>

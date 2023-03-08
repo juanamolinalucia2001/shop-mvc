@@ -1,8 +1,7 @@
 <template>
-  <v-container>
+  <v-container class="">
     <v-row>
       <v-container class="formLoginContainer">
-        <h1 class="text-center">Registro</h1>
         <br />
         <v-form
           @submit.prevent="
@@ -74,7 +73,7 @@
           <v-btn
             class="mb-2"
             :disabled="$v.$invalid"
-            color="indigo"
+            color="yellow accent-4"
             style="color: #ffffff"
             type="submit"
             >Registrarse</v-btn
@@ -143,7 +142,7 @@ export default {
         }
       }
     `;
-    document.head.appendChild(style);
+   
   },
 
   updated() {
@@ -195,3 +194,12 @@ export default {
   },
 };
 </script>
+<style scoped>
+.text-field-wrapper {
+  width: 80%;
+  display: inline-block;
+}
+.formLoginContainer{
+  max-width: 600px;
+}
+</style>

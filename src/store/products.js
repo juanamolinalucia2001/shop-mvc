@@ -69,6 +69,15 @@ export default new Vuex.Store({
         },
         setError(state, payload){
           state.error=payload
+        },
+        updateStockQuantity(state, payload) {
+          payload.forEach(item => {
+            const product = state.allStock.find(p => p.id === item.id);
+            if (product) {
+              product.stock -= item.quantity;
+              console.log("hola desde mutacion", state.allStock)
+            }
+          });
         }
 
     },
@@ -131,6 +140,7 @@ export default new Vuex.Store({
               }
             });
           },
+
 
         deleteProduct({ commit }, id) {
             commit('deleteProduct', id);

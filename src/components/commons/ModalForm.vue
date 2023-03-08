@@ -45,10 +45,10 @@
 
             <!-- Content step 3  -->
             <v-stepper-content step="3">
-                <v-container class="text-center">
+                <v-container class="text-center" >
                   <v-row>
                     <v-col cols="12">
-                         {{cart}}
+                       
                       <h1>Pago realizado con exito</h1>
                        <v-img class="mb-5" style="margin: auto;" width="150" src="https://gifdb.com/images/thumbnail/correct-verified-green-circle-check-mark-a8cbemi51csojpmt.gif"></v-img>
                       
@@ -91,28 +91,26 @@ export default {
     CardCredit
   },
   methods: {
-     ...mapActions(['agregarProducto']),
+     ...mapActions(['agregarProducto','updateStock']),
     submitForm() {
       this.showModal = false
       this.step=1
-      this.deleteAll
+      
     },
-    submit() {
-      // Lógica para enviar el formulario
-    },
-    agregarCompra(){
-      this.step++;
-      let lista=[];
+    
+      agregarCompra(){
+      let lista=[]
       lista.push(this.cart);
-      console.log(lista);
-      this.agregarProducto({ compra: lista, uid: this.user.uid, photourl: this.user.photosrc  })
-
-    },
+      this.agregarProducto({ compra: lista, uid: this.user.uid, photourl: this.user.photosrc,displayName:this.user.name, email:this.user.email, provider:this.user.provider})
+      const lista1 = this.cart.map(item => ({ id: item.id, quantity: item.quantity }));
+      this.$store.dispatch('updateStock', lista1);
+      
+       this.step++;
+    }
   
    
   },
   computed:{
-     
      totalPriceCart(){
                 return products.getters.cartTotal
             },
@@ -126,6 +124,7 @@ export default {
               return products.state.cart
         },
       ...mapState(["user"])
+
       
       
   }

@@ -10,13 +10,25 @@
          <template v-slot:item.imagen="{ item }">
           <v-img :src="item.imagen" max-width="100"></v-img>
         </template>
+
+        
         <template v-slot:item.actions="{ item }">
           <v-btn icon color="pink" @click="addToFavorites(item)">
               <v-icon class="mdi-heart" >mdi-heart</v-icon>
             </v-btn>
-            <v-btn icon color="orange"  @click="addToCart(item)">
-             + <v-icon class="mdi-cart" >mdi-cart</v-icon>
-            </v-btn>
+
+            <v-tooltip :bottom="isEnabled(item)" :disabled="isEnabled(item)">
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn icon color="orange" :disabled="!isEnabled(item)"  @click="addToCart(item)">
+                + <v-icon class="mdi-cart"
+                  v-bind="attrs"
+                  v-on="on"
+                  >mdi-cart</v-icon>
+                </v-btn>
+          </template>
+      <span >Tooltip</span>
+    </v-tooltip>
+           
         </template>
          <template v-slot:item.stock="{item}" >
 
@@ -26,6 +38,7 @@
             </p>
           </div>
         </template>
+       
       </v-data-table>
         
 
@@ -155,6 +168,10 @@ export default {
       this.snackbarColor = "green";
       setTimeout(()=>{this.showSnackbar=false},"1500")
     },
+    isEnabled(item) {
+      const stock = this.allStock.find(stock => stock.id === item.id);
+      return stock.enabled ;
+    }
 
    
       }

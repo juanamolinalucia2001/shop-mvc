@@ -1,10 +1,10 @@
 <template>
   <v-container>
     <v-row>
-      <v-col cols="8">
+      <v-col cols="8"  md="6">
         <vue-paycard :value-fields="valueFields" />
       </v-col>
-      <v-col cols="4">
+      <v-col cols="4" md="6">
      
   <form>
     <v-text-field
@@ -89,7 +89,7 @@
 
     validations: {
         valueFields:{
-        cardName: { required, alpha },
+        cardName: { required,  minLength: minLength(3), maxLength: maxLength(10), alpha },
         cardNumber: { required, minLength: minLength(19), maxLength: maxLength(19) },
         cardMonth: { required, maxLength: maxLength(2), between: between(1, 12) },
         cardYear: { required, maxLength: maxLength(4), between: between(2023, 2040)},
@@ -119,11 +119,13 @@
   }
 }
 ,
-  cardNameErrors () {
+    cardNameErrors () {
     const errors = []
     if (!this.$v.valueFields.cardName.$dirty) return errors
     !this.$v.valueFields.cardName.required && errors.push(this.$tc('validationsCardText.required'))
     !this.$v.valueFields.cardName.alpha && errors.push(this.$tc('validationsCardText.cardName'))
+    !this.$v.valueFields.cardName.minLength && errors.push(this.$tc('validationsCardText.cardNameMinMax'))
+    !this.$v.valueFields.cardName.maxLength && errors.push(this.$tc('validationsCardText.cardNameMinMax'))
     return errors
   },
   cardNumberErrors () {
