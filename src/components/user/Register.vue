@@ -13,7 +13,7 @@
           "
         >
           <v-text-field
-            color="indigo"
+            color="yellow"
             append-icon="mdi-email"
             outlined
             type="email"
@@ -22,7 +22,7 @@
             :rules="rulesEmail"
           />
           <v-text-field
-            color="indigo"
+           color="yellow"
             append-icon="mdi-account"
             outlined
             type="text"
@@ -32,7 +32,7 @@
           />
           <div class="d-flex">
             <v-text-field
-              color="indigo"
+              color="yellow"
               append-icon="mdi-lock"
               outlined
               :type="showPassword ? 'text' : 'password'"
@@ -51,7 +51,7 @@
           </div>
           <div class="d-flex">
             <v-text-field
-              color="indigo"
+              color="yellow"
               append-icon="mdi-lock-check"
               outlined
               :type="showPasswordConfirm ? 'text' : 'password'"

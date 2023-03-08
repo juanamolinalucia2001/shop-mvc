@@ -14,7 +14,7 @@
         <div class="d-flex">
           <v-text-field
             class="flex-grow-1"
-            color="indigo"
+            color="yellow"
             outlined
             type="email"
             placeholder="Ingrese su correo"
@@ -29,7 +29,7 @@
           <div class="d-flex">
             <v-text-field
               class="flex-grow-1"
-              color="indigo"
+              color="yellow"
               outlined
               :type="showPassword ? 'text' : 'password'"
               placeholder="Ingrese su contraseña"
