@@ -1,14 +1,17 @@
 <template>
   <div class=".card__container">
-    <v-select v-model="selectedCategory" :items="categories" label="Category"></v-select>
-      <v-data-table :headers="headers" :items="filteredProducts" hide-default-footer style="font-family:Helvetica;"
+    <h2 class="mt-3 text-center" v-if="selectedCategory==null">Todos nuestros Productos</h2>
+     <h2 class="mt-3 text-center" v-else>{{selectedCategory}}</h2>
+    <v-select v-model="selectedCategory" :items="categories" label="Categorias"></v-select>
+      <v-data-table :headers="headers" :items="filteredProducts" style="font-family:Helvetica;"
+        height="800" class="overflow-auto"
        :loading="loadTable"
        loading-text="Loading... Please wait">
          <template v-slot:item.title="{ item }">
           <b>{{item.title}}</b>
         </template>
          <template v-slot:item.imagen="{ item }">
-          <v-img :src="item.imagen" max-width="100"></v-img>
+          <v-img contain :src="item.imagen" max-width="100" height="120"></v-img>
         </template>
 
         
@@ -71,7 +74,7 @@ export default {
         { text:this.$tc('products.price'), value: 'precio' },
         { text:this.$tc('products.category'), value: 'categoria' },
         { text:this.$tc('products.stock'), value: 'stock' },
-        { text: this.$tc('products.actions'), value: 'actions', sortable: false },
+        { text: this.$tc('products.actions'), value: 'actions' },
       ],
       loadTable:true
       
