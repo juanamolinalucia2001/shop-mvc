@@ -30,7 +30,7 @@
           <td><v-btn @click="deleteItem(index, item.quantity)" icon color="red"><v-icon>mdi-delete</v-icon></v-btn></td>
           </tr>
        <div class="d-flex justify-star" v-if="totalPriceCart>0">
-          <v-btn @click="deleteAll" color="red" dark>{{ $tc('cart.empty')}} <v-icon>mdi-delete</v-icon></v-btn>
+          <v-btn  @click="deleteAll" color="red" dark small >{{ $tc('cart.empty')}} <v-icon small>mdi-delete</v-icon></v-btn>
       </div>
       </tbody>
     </template>

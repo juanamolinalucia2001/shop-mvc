@@ -9,6 +9,7 @@
   <form>
     <v-text-field
       v-model="valueFields.cardName"
+      :rules="nameRules"
       :error-messages="cardNameErrors"
       :label="$tc('formCard.cardName')" 
       required
@@ -89,7 +90,7 @@
 
     validations: {
         valueFields:{
-        cardName: { required,  minLength: minLength(3), maxLength: maxLength(10), alpha },
+        cardName: { required,  minLength: minLength(3), maxLength: maxLength(40)},
         cardNumber: { required, minLength: minLength(19), maxLength: maxLength(19) },
         cardMonth: { required, maxLength: maxLength(2), between: between(1, 12) },
         cardYear: { required, maxLength: maxLength(4), between: between(2023, 2040)},
@@ -101,21 +102,27 @@
   },
 
     data: () => ({
+       nameRules: [
+        (v) => /^[a-zA-Z\s]*$/.test(v) || 'El nombre solo puede contener letras y espacios',
+      ],
     }),
 
    computed: {
+    //valueFields tengo todos los campos de la tarjeta
 
     valueFields(){
       return products.state.valueFields
     },
-   isFormValid() {
-  if (!this.$v.valueFields.$invalid) {
-    products.commit('setUpdateForm', true)
 
+  //chequeo si todas las validaciones del form se cumplen
+  //Hago esto para habilitar el next del multi-step
+   isFormValid() {
+    if (!this.$v.valueFields.$invalid) {
+      //actualizo en store con true
+      products.commit('setUpdateForm', true)
   } else {
-    console.log("error");
-    products.commit('setUpdateForm', false)
-    
+    //actualizo en store con false
+      products.commit('setUpdateForm', false)
   }
 }
 ,
@@ -123,7 +130,6 @@
     const errors = []
     if (!this.$v.valueFields.cardName.$dirty) return errors
     !this.$v.valueFields.cardName.required && errors.push(this.$tc('validationsCardText.required'))
-    !this.$v.valueFields.cardName.alpha && errors.push(this.$tc('validationsCardText.cardName'))
     !this.$v.valueFields.cardName.minLength && errors.push(this.$tc('validationsCardText.cardNameMinMax'))
     !this.$v.valueFields.cardName.maxLength && errors.push(this.$tc('validationsCardText.cardNameMinMax'))
     return errors
@@ -165,6 +171,7 @@
             this.$v.$touch()
        
       },
+      //vacio todos los campos de la tarjeta
       clear () {
         this.$v.$reset()
         this.$v.$reset();

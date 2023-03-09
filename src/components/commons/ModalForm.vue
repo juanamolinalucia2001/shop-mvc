@@ -95,7 +95,6 @@ export default {
     submitForm() {
       this.showModal = false
       this.step=1
-      
     },
     
       agregarCompra(){
@@ -104,8 +103,8 @@ export default {
       this.agregarProducto({ compra: lista, uid: this.user.uid, photourl: this.user.photosrc,displayName:this.user.name, email:this.user.email, provider:this.user.provider})
       const lista1 = this.cart.map(item => ({ id: item.id, quantity: item.quantity }));
       this.$store.dispatch('updateStock', lista1);
-      
-       this.step++;
+      this.step++;
+      setTimeout(()=>this.deleteAll,1200)
     }
   
    

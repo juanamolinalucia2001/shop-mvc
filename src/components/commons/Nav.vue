@@ -2,8 +2,7 @@
   <v-card
     tile
   >
-    <v-toolbar dense class="yellow" >
-      <!-- <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon> -->
+    <v-toolbar dense class="yellow" height="55" >
 
       <v-toolbar-title>{{ $tc('nav.title') }}</v-toolbar-title>
 

@@ -3,7 +3,6 @@
    
     <Products></Products>
 
-
   </v-container>
   
 </template>

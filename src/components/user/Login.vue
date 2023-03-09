@@ -22,7 +22,7 @@
             :rules="rulesEmail"
           />
            <v-btn icon class="ml-2 mt-2">
-           <v-icon>mdi-cart</v-icon>
+           <v-icon>mdi-account</v-icon>
            </v-btn>
           
         </div>
