@@ -95,7 +95,9 @@ export default {
      ...mapActions(['agregarProducto','updateStock']),
     submitForm() {
       this.showModal = false
-      this.step=1
+      this.step=1 
+      this.deleteAll
+      router.push("/")
     },
     
       agregarCompra(){
@@ -105,7 +107,7 @@ export default {
       const lista1 = this.cart.map(item => ({ id: item.id, quantity: item.quantity }));
       this.$store.dispatch('updateStock', lista1);
       this.step++;
-      setTimeout(()=>this.deleteAll,1500)
+      setTimeout(()=> this.deleteAll,1500)
     }
   
    

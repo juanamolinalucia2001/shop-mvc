@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-5 my-2">
+  <v-card class="mx-5 my-2" >
     <v-simple-table class="max-height-table">
     <template v-slot:default>
       <thead>

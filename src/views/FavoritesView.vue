@@ -1,6 +1,7 @@
 <template>
 <div>
-  <h1 class="mt-5 text-center">{{$tc('favorites.title')}}</h1>
+  <h2 class="mt-5 text-center">{{$tc('favorites.title')}}</h2>
+ 
   <v-layout class="mt-5 align-center">
       <Favorites></Favorites>
   </v-layout>
@@ -8,6 +9,7 @@
 </template>
 <script>
 import Favorites from '@/components/Favorites.vue'
+import products from '../store/products';
 
 
   export default {
@@ -16,5 +18,6 @@ import Favorites from '@/components/Favorites.vue'
     components: {
       Favorites,
     },
+  
   }
 </script>

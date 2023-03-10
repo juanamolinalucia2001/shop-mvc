@@ -4,7 +4,7 @@
      <h2 class="mt-3 text-center" v-else>{{selectedCategory}}</h2>
     <v-select v-model="selectedCategory" :items="categories" label="Categorias"></v-select>
       <v-data-table :headers="headers" :items="filteredProducts" style="font-family:Helvetica;"
-        height="800" class="overflow-y"
+        height="400" class="overflow-y"
        :loading="loadTable"
        loading-text="Loading... Please wait">
          <template v-slot:item.title="{ item }">

@@ -104,8 +104,9 @@ export default new Vuex.Store({
           };
             
               commit("setUser", createdUser);
-              router.push("/");
               location.reload();
+              router.push("/");
+              
           
         })
         .catch((err) => {
@@ -153,7 +154,8 @@ export default new Vuex.Store({
 
     signOut({ commit }) {
       auth.signOut().then(() => {
-        router.push("/");
+        location.reload();
+        router.push("/acceso");
       });
     },
 
