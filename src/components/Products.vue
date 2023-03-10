@@ -1,18 +1,17 @@
 <template>
   <div class=".card__container">
-  
     <h2 class="mt-3 text-center" v-if="selectedCategory==null">Todos nuestros Productos</h2>
      <h2 class="mt-3 text-center" v-else>{{selectedCategory}}</h2>
     <v-select v-model="selectedCategory" :items="categories" label="Categorias"></v-select>
       <v-data-table :headers="headers" :items="filteredProducts" style="font-family:Helvetica;"
-        height="800" class="overflow-auto"
+        height="800" class="overflow-y"
        :loading="loadTable"
        loading-text="Loading... Please wait">
          <template v-slot:item.title="{ item }">
-          <b>lalal{{item.title}}</b>
+          <b>{{item.title}}</b>
         </template>
        <template v-slot:item.descripcion="{ item }">
-           <div class="overflow mt-2 mb-2" style="overflow-y: auto; max-height: 120px;">puto{{item.descripcion}}</div>
+           <div class="overflow mt-2 mb-2" style="overflow-y: auto; max-height: 120px;">{{item.descripcion}}</div>
       </template>
          <template v-slot:item.imagen="{ item }">
           <v-img contain :src="item.imagen" max-width="100" height="120"></v-img>
@@ -138,7 +137,7 @@ export default {
     },
   },
       methods:{
-       addToFavorites(product) {
+  addToFavorites(product) {
            // Verificar si el producto ya está en la lista de favoritos
           if (this.favs.some(p => p.id === product.id)) {
             this.showSnackbar = true;
@@ -147,20 +146,19 @@ export default {
             setTimeout(()=>this.showSnackbar=false,1200)
           return
           }
-
           // Agregar el producto a la lista de favoritos
           this.favs.push(product);
           products.commit('setAddFavorites', this.favs);
-
           this.showSnackbar = true;
           this.snackbarText = "Product added to favorites: " + product.title;
           this.snackbarColor = "red";
           setTimeout(()=>this.showSnackbar=false,1200)
           
       },
+
 addToCart(product) {
   // Buscamos si el producto ya está en el carrito
-  const existingProduct = this.cart.find(p => p.id === product.id);
+  const existingProduct = products.state.cart.find(p => p.id === product.id);
   // Buscamos la cantidad de stock disponible para el producto
   const stock = this.allStock.find(p => p.id === product.id)?.stock;
 
@@ -169,30 +167,23 @@ addToCart(product) {
   // o si el usuario intenta agregar una cantidad mayor al stock disponible.
   if (!stock || (existingProduct && existingProduct.quantity >= stock) || (!existingProduct && product.quantity > stock)) {
     // Si no hay suficiente stock disponible, mostramos una notificación de error y salimos de la función.
-    this.showSnackbar = true;
-    this.snackbarText = `${product.title} cannot be added to cart due to insufficient stock`;
-    this.snackbarColor = "red";
-    setTimeout(()=>{this.showSnackbar=false},"1000");
+    this.showSnackbarMessage(`${product.title} cannot be added to cart due to insufficient stock`, "red");
     return;
   }
+
   // Si el producto ya está en el carrito, incrementamos su cantidad en 1.
   if (existingProduct) {
     existingProduct.quantity++;
   // De lo contrario, creamos un nuevo objeto de producto con cantidad 1 y lo agregamos al carrito.
   } else {
     product.quantity = 1;
-    this.cart.push(product);
+    products.commit('setAddCart', [product]);
   }
-  // Guardamos los cambios del carrito en un store llamado "products".
-  products.commit('setAddCart', this.cart);
-      
+
   // Mostramos una notificación de éxito indicando que el producto se ha agregado al carrito.
-  this.showSnackbar = true;
-  this.snackbarText = `${product.title} added to cart (${product.quantity} ${product.quantity > 1 ? 'items' : 'item'})`;
-  this.snackbarColor = "green";
-  setTimeout(()=>{this.showSnackbar=false},"1500");
-}
-,
+  this.showSnackbarMessage(`${product.title} added to cart`, "green");
+   products.state.cartLength++
+},
 
 showSnackbarMessage(text, color) {
   this.showSnackbar = true;
@@ -201,23 +192,11 @@ showSnackbarMessage(text, color) {
   setTimeout(()=>{this.showSnackbar=false},"1500")
 },
 
-  aaa(product) {
-  const stock = this.allStock.find(p => p.id === product.id)?.stock;
-  const existingProduct = this.cart.find(p => p.id === product.id);
-  if (existingProduct.quantity >= stock) {
-    
-  
-  }else{
 
-  }
-  }
-,
-    
     isEnabled(item) {
       const stock = this.allStock.find(stock => stock.id === item.id);
       return stock.enabled && stock.stock >=1 ;
     }
-
    
       }
     

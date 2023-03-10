@@ -1,6 +1,6 @@
 <template>
-<div>
-    <v-simple-table  class="mr-5 ml-5">
+  <v-card class="mx-5 my-2">
+    <v-simple-table class="max-height-table">
     <template v-slot:default>
       <thead>
         <tr>
@@ -22,24 +22,28 @@
       
       <tbody>
         <tr
-          v-for="(item, index) in cart" :key="item.id" 
+          v-for="(item, index) of cart" :key="item.id" 
         >
           <td>{{item.quantity}}</td>
           <td>{{item.title}}</td>
           <td>${{item.precio*item.quantity}}</td>
           <td><v-btn @click="deleteItem(index, item.quantity)" icon color="red"><v-icon>mdi-delete</v-icon></v-btn></td>
           </tr>
-       <div class="d-flex justify-star" v-if="totalPriceCart>0">
-          <v-btn  @click="deleteAll" color="red" dark small >{{ $tc('cart.empty')}} <v-icon small>mdi-delete</v-icon></v-btn>
-      </div>
       </tbody>
     </template>
   </v-simple-table>
-      <div>
-           <MultiStepForm  v-if="totalPriceCart>0"  />
-      </div>
   
-</div>
+  
+      <div class="mb-5">
+          <div class="d-flex justify-end " v-if="totalPriceCart>0">
+          <v-btn  @click="deleteAll" color="red" class="ma-auto" dark small  >{{ $tc('cart.empty')}} <v-icon small>mdi-delete</v-icon></v-btn>
+      </div>
+           <MultiStepForm  v-if="totalPriceCart>0"  class="ml-5 mr-5"   />
+      </div>
+      
+            
+  
+  </v-card>
 
 
   
@@ -68,8 +72,6 @@ export default {
                 return products.getters.cartTotal
             },
 
-           
-
       },
     methods:{
         deleteItem(index, cantidad){
@@ -82,3 +84,9 @@ export default {
      
 }
 </script>
+<style>
+.max-height-table {
+  max-height: 300px;
+  overflow-y: auto;
+}
+</style>

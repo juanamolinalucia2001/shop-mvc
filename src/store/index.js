@@ -4,9 +4,6 @@ import {
   db,
   auth,
   user,
-  GoogleAuthProvider,
-  FacebookAuthProvider,
-  GithubAuthProvider,
 } from "@/firebase" ;
 import router from "../router";
 
@@ -14,8 +11,6 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-   
-    snackBarAlerts: [],
     user: null,
     error: null,
     loader: false,
@@ -27,72 +22,15 @@ export default new Vuex.Store({
     setCompra(state, payload) {
       state.compra = payload;
     },
-    setProduct(state, payload) {
-      state.task = payload;
-    },
-    setSnackBarAlert(state, payload) {
-      state.snackBarAlerts.push(payload);
-    },
     setUser(state, payload) {
       state.user = payload;
     },
     setError(state, payload) {
       state.error = payload;
-    },
-    setLoader(state, payload) {
-      state.loader = payload;
-    },
-    setSuccess(state, payload) {
-      state.success = payload;
-    },
+    }
   },
   actions: {
-    getCompras({ commit, state }) {
-      commit('setLoader', true);
-      const compras = [];
-      db.collection(state.user.email)
-        .get()
-        .then((res) => {
-          res.forEach((doc) => {
-            let compra = doc.data();
-            compra.id = doc.id;
-            tasks.push(task);
-          });
-          setTimeout(() => {
-            commit('setLoader', false);
-          }, 1000)
-          commit("setTasks", tasks);
-        });
-    },
-    getTask({ commit, state }, id) {
-      db.collection(state.user.email)
-        .doc(id)
-        .get()
-        .then((doc) => {
-          let task = doc.data();
-          task.id = doc.id;
-          commit("setTask", task);
-        });
-    },
-    editTask({ commit, state }, task) {
-      commit('setLoader', true);
-      db.collection(state.user.email)
-        .doc(task.id)
-        .update({
-          name: task.name,
-        })
-        .then(() => {
-          router.push("/");
-          commit("setSnackBarAlert", {
-            message: `Tarea editada con éxito`,
-            color: "green",
-            timeout: 5000,
-          });
-          setTimeout(() => {
-            commit('setLoader', false);
-          }, 1000)
-        });
-    },
+    
     async updateStock({commit},productsList) {
       console.log(productsList)
       const stocks = db.collection("stock");
@@ -218,9 +156,11 @@ export default new Vuex.Store({
         router.push("/");
       });
     },
+
     detectUser({ commit }, user) {
       commit("setUser", user);
     },
+
     changeUserName({ commit }, name){
       if (name.length >= 3 && name.length < 24) {
         auth.currentUser.updateProfile({
@@ -237,6 +177,7 @@ export default new Vuex.Store({
         commit("setSuccess", null);
       }
     },
+    
     changePassword ({ commit }, newPassword) {
       auth.currentUser.updatePassword(newPassword).then(function() {
         commit("setError", null);

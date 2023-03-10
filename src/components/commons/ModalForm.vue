@@ -1,9 +1,10 @@
 <template>
- <v-row class="d-flex justify-center mt-5"   >
+ <v-row class="d-flex justify-center mt-5 mb-5"   >
   <v-dialog v-model="showModal" max-width="1000" class="mt-5">
      <template v-slot:activator="{ on, attrs }" >
-      <h3 class="ml-5 mr-5 ">Total a pagar US${{totalPriceCart}}</h3>
+      <h4 class="ml-5 mr-5 mt-5 mb-5">Total a pagar US${{totalPriceCart}}</h4>
         <v-btn
+        class=" mt-5 mb-5"
           color="yellow"
           dark
           v-bind="attrs"
@@ -104,7 +105,7 @@ export default {
       const lista1 = this.cart.map(item => ({ id: item.id, quantity: item.quantity }));
       this.$store.dispatch('updateStock', lista1);
       this.step++;
-      setTimeout(()=>this.deleteAll,1200)
+      setTimeout(()=>this.deleteAll,1500)
     }
   
    

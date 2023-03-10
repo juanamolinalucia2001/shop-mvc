@@ -27,8 +27,7 @@ export default new Vuex.Store({
       }
     },
     mutations:{
-      
-      
+       
       setUpdateForm(state, estado){
         state.formValid=estado;
 
@@ -45,13 +44,11 @@ export default new Vuex.Store({
         setAllStock(state, data) {
           state.allStock = data;
         },
-        //add product to list favs
         setAddFavorites(state,payload){
-          state.favorites= payload
+          state.favorites=payload
         },
         setAddCart(state,payload){
-          state.cart= payload
-          state.cartLength++
+          state.cart = state.cart.concat(payload)
         },
         deleteProduct(state, { index, cantidad }) {
           state.cart.splice(index, 1);
