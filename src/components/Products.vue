@@ -137,24 +137,17 @@ export default {
     },
   },
       methods:{
-  addToFavorites(product) {
-           // Verificar si el producto ya está en la lista de favoritos
-          if (this.favs.some(p => p.id === product.id)) {
-            this.showSnackbar = true;
-            this.snackbarText = "This product is already in favorites";
-            this.snackbarColor = "violet";
-            setTimeout(()=>this.showSnackbar=false,1200)
-          return
-          }
-          // Agregar el producto a la lista de favoritos
-          this.favs.push(product);
-          products.commit('setAddFavorites', this.favs);
-          this.showSnackbar = true;
-          this.snackbarText = "Product added to favorites: " + product.title;
-          this.snackbarColor = "red";
-          setTimeout(()=>this.showSnackbar=false,1200)
-          
-      },
+addToFavorites(product) {
+  // Verificar si el producto ya está en la lista de favoritos
+  if (products.state.favorites.some(p => p.id === product.id)) {
+    this.showSnackbarMessage(`This product is already in favorites`, "violet");
+    return;
+  }
+  // Agregar el producto a la lista de favoritos
+  products.commit('setAddFavorites', product);
+  this.showSnackbarMessage(`Product added to favorites: ${product.title} `, "red");
+}
+,
 
 addToCart(product) {
   // Buscamos si el producto ya está en el carrito

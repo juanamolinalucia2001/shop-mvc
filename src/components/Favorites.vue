@@ -4,7 +4,7 @@
              :key="product.id">
             <div class="card">
                     <div>
-                        <v-img :src="product.imagen" alt="product image" contain max-height="200px"></v-img>
+                        <v-img contain :src="product.imagen" alt="product image" height="150px" class="mt-2"></v-img>
                     </div>
                     <v-card-title>{{ product.title }}</v-card-title>
                     <v-card-title>${{product.precio}}</v-card-title>

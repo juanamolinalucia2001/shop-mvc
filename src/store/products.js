@@ -45,7 +45,7 @@ export default new Vuex.Store({
           state.allStock = data;
         },
         setAddFavorites(state,payload){
-          state.favorites=payload
+          state.favorites= state.favorites.concat(payload)
         },
         setAddCart(state,payload){
           state.cart = state.cart.concat(payload)
